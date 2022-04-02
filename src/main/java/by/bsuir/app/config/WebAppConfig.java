@@ -120,7 +120,7 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("homePage");
+        registry.addViewController("/home").setViewName("home");
         registry.addViewController("/404.html").setViewName("404");
     }
 
@@ -128,7 +128,4 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-
-    //----- Flyway migration -----//
-
 }
