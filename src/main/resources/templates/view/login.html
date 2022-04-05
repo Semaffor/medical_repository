@@ -10,25 +10,30 @@
 <body>
 <div class="container-wrapper">
     <div class="container">
-        <form action="${contextPath}controller?command=login" method="post">
-            <div class="title">Log In</div>
+        <form th:action="@{/auth/authentication}" method="post">
+            <div class="title" th:text="#{login.auth}"></div>
             <div class="input-box underline">
-                <input type="text" placeholder="Username" name="username"
+                <input type="text" th:placeholder="#{login.username}" name="username"
                        autocomplete="off" required>
                 <div class="underline"></div>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Pass" name="password"
+                <input type="password" th:placeholder="#{login.password}" name="password"
                        autocomplete="off" required>
                 <div class="underline"></div>
             </div>
+            <div th:if="${param.error}" class="alert alert-danger mt-4" th:text="#{login.incorrect.login-password}">
 
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-info mt-4" th:text="#{login.logout}">
+            </div>
             <div class="input-box button">
-                <input type="submit" value="Log In"/>
+                <input type="submit" th:value="#{login.signIn}"/>
             </div>
         </form>
         <div class="title forgot">
-            <a class="underlineHover" href="${contextPath}controller?command=registration">REgistr</a>
+            <a class="underlineHover" th:href="@{auth/registration}" th:text="#{login.registration}"></a>
         </div>
     </div>
 </div>

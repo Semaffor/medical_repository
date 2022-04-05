@@ -27,6 +27,7 @@ public class SecurityUser implements UserDetails {
         this.isActive = isActive;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

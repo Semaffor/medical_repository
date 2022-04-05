@@ -6,14 +6,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Role {
-    ADMIN(Set.of(Permission.DEVELOPERS_WRITE)),
-    USER(Set.of(Permission.DEVELOPERS_READ)),
-    DOCTOR(Set.of(Permission.DEVELOPERS_READ));
+    ADMIN(1, Set.of(Permission.DEVELOPERS_WRITE)),
+    USER(2, Set.of(Permission.DEVELOPERS_READ)),
+    DOCTOR(3, Set.of(Permission.DEVELOPERS_READ));
 
+    private final int roleCode;
     private final Set<Permission> permissions;
 
-    Role(Set<Permission> permissions) {
+    Role(int roleCode, Set<Permission> permissions) {
+        this.roleCode = roleCode;
         this.permissions = permissions;
+    }
+
+    public int getRoleCode() {
+        return roleCode;
     }
 
     public Set<Permission> getPermissions() {

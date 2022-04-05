@@ -34,19 +34,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//                http.authorizeRequests()
-//                    .antMatchers("/", "/static/**").permitAll()
-//                    .anyRequest().authenticated()
-//                .and().formLogin()
-//                    .loginPage("/auth/logIn").permitAll()
-//                    .loginProcessingUrl("/authentication")
-//                    .defaultSuccessUrl("/home")
-//                .and().logout()
-//                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
-//                    .invalidateHttpSession(true)
-//                    .clearAuthentication(true)
-//                    .deleteCookies("JSESSIONID")
-//                    .logoutSuccessUrl("/auth/logIn");
+                http.authorizeRequests()
+                    .antMatchers("/", "/static/**", "/home").permitAll()
+                    .anyRequest().authenticated()
+                .and().formLogin()
+                    .loginPage("/auth/logIn").permitAll()
+                    .loginProcessingUrl("/auth/authentication")
+                    .defaultSuccessUrl("/home")
+                .and().logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/home");
 //                .and()
 //                    .rememberMe()
 //                    .tokenValiditySeconds(TOKEN_VALIDITY_SECONDS);
