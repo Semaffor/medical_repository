@@ -16,35 +16,35 @@
             </div>
             <div sec:authorize="hasAuthority('ADMIN')" th:remove="tag">
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.admin.management}"/>
+                    <a class="btn-itd" th:href="@{/admin/management}" th:text="#{navbar.admin.management}"/>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.admin.reports}"/>
+                    <a class="btn-itd" th:href="@{/admin/reports}" th:text="#{navbar.admin.reports}"/>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.admin.messages}"/>
+                    <a class="btn-itd" th:href="@{/admin/messages}" th:text="#{navbar.admin.messages}"/>
                 </li>
             </div>
             <div sec:authorize="hasAuthority('USER')" th:remove="tag">
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.user.personal}">Личный кабинет</a>
+                    <a class="btn-itd" th:href="@{/user/personal}" th:text="#{navbar.user.personal}">Личный кабинет</a>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.user.analyzes}">Анализы</a>
+                    <a class="btn-itd" th:href="@{/user/analyzes}" th:text="#{navbar.user.analyzes}">Анализы</a>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.user.conclusions}">Заключения</a>
+                    <a class="btn-itd" th:href="@{/user/conclusions}" th:text="#{navbar.user.conclusions}">Заключения</a>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.user.statistics}">Статистика</a>
+                    <a class="btn-itd" th:href="@{/user/statistics}" th:text="#{navbar.user.statistics}">Статистика</a>
                 </li>
             </div>
             <div sec:authorize="hasAuthority('DOCTOR')">
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.doctor.patients}">Пациенты</a>
+                    <a class="btn-itd" th:href="@{/doctor/patients}" th:text="#{navbar.doctor.patients}">Пациенты</a>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/auth/logIn}" th:text="#{navbar.doctor.analytics}">Аналитика</a>
+                    <a class="btn-itd" th:href="@{/doctor/analytics}" th:text="#{navbar.doctor.analytics}">Аналитика</a>
                 </li>
             </div>
             <div sec:authorize="isAuthenticated()">
