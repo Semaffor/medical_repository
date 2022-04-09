@@ -22,13 +22,13 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 @RequestMapping("/auth")
-public class AuthController {
+public class RegistrationController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(UserService userService,
-                          PasswordEncoder passwordEncoder) {
+    public RegistrationController(UserService userService,
+                                  PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
