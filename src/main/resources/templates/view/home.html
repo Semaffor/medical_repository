@@ -28,11 +28,9 @@
                     <span th:text="#{main.info.second}"/>
                 </h1>
                 <div class="head-name-bottom" th:text="#{main.info.third}"></div>
-                <div class="head-title text-uppercase" th:text="#{navbar.brand}"></div>
+                <div class="head-title text-uppercase mb-4" th:text="#{navbar.brand}"></div>
                 <div sec:authorize="!isAuthenticated()">
-                    <button class="btn-itd btn-reg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <span th:text="#{main.registration}"/>
-                    </button>
+                    <a class="btn-itd btn-reg" th:href="@{/auth/registration}" th:text="#{main.registration}"></a>
                 </div>
             </div>
             <div class="col head-img">
@@ -90,46 +88,6 @@
         <div class="row">
             <div class="col-12 text-center">
                 <a href="#header" class="btn-itd btn-reg text-uppercase" th:text="#{center.start-use}"></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="${contextPath}controller?command=login" method="post">
-                    <div class="title">Registration</div>
-                    <div class="input-box underline">
-                        <input type="text" placeholder="username" name="username" autocomplete="off" required>
-                        <div class="underline"></div>
-                    </div>
-                    <div class="input-box">
-                        <input type="password" placeholder="password" name="password"
-                               autocomplete="off" minlength="3" maxlength="28" required>
-                        <div class="underline"></div>
-                    </div>
-                    <div class="input-box">
-                        <input type="password" placeholder="repeatedPassword"
-                               name="repeatedPassword"
-                               autocomplete="off" minlength="3" maxlength="28" required>
-                        <div class="underline"></div>
-                    </div>
-
-                    <div class="input-box button">
-                        <input type="submit" value="Sing up">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
