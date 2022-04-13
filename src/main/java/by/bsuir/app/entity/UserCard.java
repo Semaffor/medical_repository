@@ -1,18 +1,16 @@
 package by.bsuir.app.entity;
 
+import by.bsuir.app.entity.enums.Gender;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"user"}, callSuper = true)
 @Entity
 public class UserCard extends BaseEntity {
 
@@ -22,8 +20,12 @@ public class UserCard extends BaseEntity {
    private String surname;
    private String thirdName;
    private Date birthday;
+   private Integer mobile;
 
-   @OneToOne(fetch = FetchType.LAZY)
+   @Enumerated(EnumType.ORDINAL)
+   private Gender gender;
+
+   @OneToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "user_id")
    private User user;
 }

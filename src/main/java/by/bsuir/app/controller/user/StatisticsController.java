@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StatisticsController {
     @GetMapping("/")
     private String showStatisticsPage(Model model) {
-
+        throw new UnsupportedOperationException();
     }
 }

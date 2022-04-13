@@ -11,5 +11,6 @@ public class ManagementController {
 
     @GetMapping("/")
     private String showManagementPage(Model model) {
-
+        throw new UnsupportedOperationException();
     }
+}

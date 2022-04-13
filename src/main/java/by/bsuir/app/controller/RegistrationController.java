@@ -1,12 +1,10 @@
 package by.bsuir.app.controller;
 
-import by.bsuir.app.dto.UserDto;
-import by.bsuir.app.entity.User;
+import by.bsuir.app.dto.UserRegistrationDto;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,19 +33,19 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String getRegistrationPage(Model model) {
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("user", new UserRegistrationDto());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registerUser(@Valid @ModelAttribute UserDto user, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String registerUser(@Valid @ModelAttribute UserRegistrationDto user, BindingResult bindingResult, Model model, HttpServletRequest request) {
+        model.addAttribute("user", user);
+
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
             return "registration";
         }
         try {
             userService.registerNewUserAccount(user, passwordEncoder);
-//            model.addAttribute("success");
             return "redirect:/auth/logIn";
         } catch (UserAlreadyExistsException e) {
             model.addAttribute("alreadyExists", "true");

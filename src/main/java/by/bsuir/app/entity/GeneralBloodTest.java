@@ -12,14 +12,14 @@ import java.util.Optional;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class GeneralBloodTest extends Analyzes<GeneralBloodTest> {
 
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public Optional<GeneralBloodTest> analize() {
-        return Optional.empty();
-    }
+    private double erythrocytes;
+    private double leukocytes;
+    private double hemoglobinValue;
 }

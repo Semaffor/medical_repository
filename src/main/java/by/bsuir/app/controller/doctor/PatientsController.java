@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PatientsController {
     @GetMapping("/")
     private String showPatientsPage(Model model) {
+        throw new UnsupportedOperationException();
 
     }
 }

@@ -2,25 +2,24 @@ package by.bsuir.app.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"user"}, callSuper = true)
+@ToString
 @Entity
 public class LogInfo extends BaseEntity {
 
    private static final long serialVersionUID = 1L;
 
+   @NonNull
    private Date timestamp;
 
-   @OneToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "user_id")
+   @ManyToOne
    private User user;
 }

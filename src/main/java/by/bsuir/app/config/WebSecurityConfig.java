@@ -20,6 +20,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final static String HOME_PAGE_URL = "/";
     private final static int TOKEN_VALIDITY_SECONDS = 2419200;
     private final static int ENCRYPTION_FORCE = 12;
 
@@ -33,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
                 http.authorizeRequests()
-                    .antMatchers("/", "/static/**", "/home", "/auth/**").permitAll()
+                    .antMatchers(HOME_PAGE_URL, "/static/**", "/auth/**").permitAll()
                     .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
                     .antMatchers("/user/**").hasAuthority(Role.USER.name())
                     .antMatchers("/doctor/**").hasAuthority(Role.DOCTOR.name())
@@ -41,13 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                     .loginPage("/auth/logIn").permitAll()
                     .loginProcessingUrl("/auth/authentication")
-                    .defaultSuccessUrl("/home")
+                    .defaultSuccessUrl(HOME_PAGE_URL, false)
                 .and().logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .deleteCookies("JSESSIONID")
-                    .logoutSuccessUrl("/home");
+                    .logoutSuccessUrl(HOME_PAGE_URL);
 //                .and()
 //                    .rememberMe()
 //                    .tokenValiditySeconds(TOKEN_VALIDITY_SECONDS);

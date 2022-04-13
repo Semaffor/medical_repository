@@ -1,6 +1,6 @@
 package by.bsuir.app.validation;
 
-import by.bsuir.app.dto.UserDto;
+import by.bsuir.app.dto.UserRegistrationDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +13,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context) {
-        UserDto user = (UserDto) obj;
+        UserRegistrationDto user = (UserRegistrationDto) obj;
         return user.getPassword().equals(user.getMatchingPassword());
     }
 }

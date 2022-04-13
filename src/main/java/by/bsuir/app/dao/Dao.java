@@ -22,6 +22,4 @@ public interface Dao<T extends Serializable> {
     void delete(T entity);
 
     void deleteById(Long entityId);
-
-    void setLocalClass(Class<T> clazzToSet);
 }

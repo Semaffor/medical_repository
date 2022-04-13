@@ -5,7 +5,7 @@
     <!--    <th:block th:include="/common/fragments-util :: doctype-html-head-tags-begin"/>-->
     <th:block th:include="/common/fragments-util :: head"/>
     <link th:href="@{/static/css/home.css}" rel="stylesheet"/>
-    <title>Aduline</title>
+    <title th:text="#{navbar.brand}"></title>
 </head>
 <body>
 <div th:replace="/common/fragments-page :: header"/>

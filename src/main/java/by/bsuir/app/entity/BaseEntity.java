@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 
 @Data
 @MappedSuperclass
+@ToString
 public abstract class BaseEntity implements Serializable, Identifiable {
 
     private static final long serialVersionUID = 1L;

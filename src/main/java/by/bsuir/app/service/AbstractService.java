@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public abstract class AbstractService<T extends Serializable> implements Service<T> {
 
-    private final Dao<T> dao;
+    protected final Dao<T> dao;
 
     public AbstractService(Dao<T> dao) {
         this.dao = dao;
@@ -30,4 +30,6 @@ public abstract class AbstractService<T extends Serializable> implements Service
     public List<T> findAll() {
         return dao.findAll();
     }
+
+
 }

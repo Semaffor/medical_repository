@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ConclusionsController {
     @GetMapping("/")
     private String showConclusionsPage(Model model) {
+        throw new UnsupportedOperationException();
 
     }
 }

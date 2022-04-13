@@ -50,6 +50,8 @@ header {
 footer {
     color: #caced1 !important;
     background-color: var(--color_dark);
+    position: absolute;
+    width: 100%;
 }
 
 .btn-itd {

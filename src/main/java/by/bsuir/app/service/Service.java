@@ -1,5 +1,6 @@
 package by.bsuir.app.service;
 
+import by.bsuir.app.entity.User;
 import by.bsuir.app.exception.ServiceException;
 
 import java.io.Serializable;

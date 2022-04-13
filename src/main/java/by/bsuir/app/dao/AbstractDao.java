@@ -4,7 +4,6 @@ import by.bsuir.app.entity.User;
 import by.bsuir.app.exception.DaoException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,15 +15,12 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Serializable> implements Dao<T> {
 
-    private Class<T> localClass;
+    private final Class<T> localClass;
     private final SessionFactory sessionFactory;
 
-    public AbstractDao(SessionFactory sessionFactory) {
+    public AbstractDao(SessionFactory sessionFactory, Class<T> localClass) {
+        this.localClass = localClass;
         this.sessionFactory = sessionFactory;
-    }
-
-    public final void setLocalClass(Class<T> classToSet) {
-        this.localClass = classToSet;
     }
 
     @Override

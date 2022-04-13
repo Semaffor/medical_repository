@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserDaoImpl extends AbstractDao<User> implements UserDao<User> {
 
     public UserDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
+        super(sessionFactory, User.class);
     }
 
     @Override

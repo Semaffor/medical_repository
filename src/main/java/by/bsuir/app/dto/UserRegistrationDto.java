@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @PasswordMatches
-public class UserDto {
+public class UserRegistrationDto {
     @NotEmpty(message = "1")
     @NotBlank(message = "1")
     private String username;

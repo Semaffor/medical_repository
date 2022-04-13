@@ -11,6 +11,7 @@ public class MessagesController {
 
     @GetMapping("/")
     private String showMessagesPage(Model model) {
+        throw new UnsupportedOperationException();
 
     }
 }
