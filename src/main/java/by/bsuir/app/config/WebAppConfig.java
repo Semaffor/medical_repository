@@ -54,8 +54,6 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
         templateResolver.setCharacterEncoding(CHARACTER_ENCODING);
         templateResolver.setPrefix(PREFIX);
         templateResolver.setSuffix(SUFFIX);
-        // HTML is the default value, added here for the sake of clarity.
-        templateResolver.setTemplateMode(TemplateMode.HTML);
         return templateResolver;
     }
 
@@ -78,8 +76,6 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding(CHARACTER_ENCODING);
-        // 'order' and 'viewNames' are optional
-        viewResolver.setOrder(1);
         return viewResolver;
     }
 
