@@ -52,7 +52,8 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0" th:text="#{profile.birthday}">Address</h6>
                             </div>
-                            <div class="col-sm-9 text-secondary" th:text="${user.card?.birthday}"></div>
+                            <div class="col-sm-9 text-secondary"
+                                 th:text="${#dates.format(user.card?.birthday, 'dd-MM-yyyy')}"></div>
                         </div>
                         <hr>
                         <div class="row">

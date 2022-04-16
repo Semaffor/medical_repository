@@ -68,6 +68,20 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
+    public void changeBlockStatusByUsername(String username) throws ServiceException {
+        try {
+            Optional<User> optionalUser = userDao.findByUsername(username);
+            if (optionalUser.isPresent()){
+                User user = optionalUser.get();
+                user.setBlocked(!user.isBlocked());
+                userDao.update(user);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     @Transactional
     public Optional<User> findByUsername(String username) throws ServiceException {
         try {

@@ -4,6 +4,7 @@ import by.bsuir.app.dao.Dao;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +19,7 @@ public abstract class AbstractService<T extends Serializable> implements Service
     }
 
     @Override
+    @Transactional
     public Optional<T> findById(Long id) throws ServiceException {
         try {
             return dao.findById(id);
@@ -27,9 +29,8 @@ public abstract class AbstractService<T extends Serializable> implements Service
     }
 
     @Override
+    @Transactional
     public List<T> findAll() {
         return dao.findAll();
     }
-
-
 }

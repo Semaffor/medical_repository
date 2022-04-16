@@ -72,3 +72,13 @@
     width: 100px;
     height: 100px;
 }
+
+.w-24 {
+    width: 24px;
+}
+
+.block_actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -14,6 +14,7 @@ public interface UserService extends Service<User> {
 
     void update(CardDto cardDto) throws ServiceException;
     void update(User user) throws ServiceException;
+    void changeBlockStatusByUsername(String username) throws ServiceException;
     Optional<User> findById(Long id) throws ServiceException;
     Optional<User> findByUsername(String username) throws ServiceException;
     Optional<User> findByEmail(String email) throws ServiceException;

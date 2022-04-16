@@ -7,6 +7,7 @@ import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -50,9 +51,11 @@ public class PersonalController {
         try {
             Optional<User> optionalUser = userService.findByUsername(username);
             if (optionalUser.isPresent()) {
-                CardDto user = CardDto.fromUser(optionalUser.get());
-                model.addAttribute("cardDto", user);
+                User user = optionalUser.get();
+                CardDto userDto = CardDto.fromUser(user);
+                model.addAttribute("cardDto", userDto);
                 model.addAttribute("genders", Gender.values());
+                model.addAttribute("roles", user.getRoles());
             } else {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                         String.format("Entity with username: %s not " + "found", username));
