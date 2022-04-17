@@ -20,7 +20,7 @@ public class UserCard extends BaseEntity {
    private String surname;
    private String thirdName;
    private Date birthday;
-   private Integer mobile;
+   private String mobile;
 
    @Enumerated(EnumType.ORDINAL)
    private Gender gender;

@@ -35,9 +35,9 @@ public class CardDto {
     @Email
     private String email;
 
-//    @Pattern(regexp = "^(\\d{7})")
     @NotNull
-    private Integer mobile;
+    @Pattern(regexp = "^(\\d{9})", message = "+375 - XXXXXXXXX")
+    private String mobile;
 
     //TODO DateValidator
     @NotNull

@@ -7,7 +7,7 @@ import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.Optional;
 
 @Slf4j
@@ -24,6 +25,8 @@ import java.util.Optional;
 @RequestMapping("/user/personal")
 public class PersonalController {
 
+    private static final String SUCCESS = "SUCCESS";
+    private static final String FAIL = "FAIL";
     private final UserService userService;
 
     public PersonalController(UserService userService) {
@@ -35,10 +38,14 @@ public class PersonalController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         try {
-            Optional<User> user = userService.findByUsername(username);
-            user.ifPresent(value -> model.addAttribute("user", value));
-            user.ifPresent(value -> model.addAttribute("username", value.getUsername()));
-            user.ifPresent(value -> model.addAttribute("genders", Gender.values()));
+            Optional<User> userOptional = userService.findByUsername(username);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                model.addAttribute("user", user);
+                model.addAttribute("username", user.getUsername());
+                model.addAttribute("genders", Gender.values());
+                model.addAttribute("roles", user.getRoles());
+            }
         } catch (ServiceException e) {
             model.addAttribute("loadingFail", "true");
             log.error(e.getMessage());
@@ -46,6 +53,7 @@ public class PersonalController {
         return "user/personal";
     }
 
+    //    @PreAuthorize("hasAuthority('ADMIN') and hasAuthority('USER')")
     @GetMapping("/edit/{username}")
     private String showEditPersonalPage(@PathVariable String username, Model model) {
         try {
@@ -67,15 +75,20 @@ public class PersonalController {
     }
 
     @PostMapping("/edit/{username}")
-    private String editPersonalData(@Valid CardDto cardDto, BindingResult bindingResult, Model model) {
+    @ResponseBody
+    private ResponseEntity<?> editPersonalData(@RequestBody @Valid CardDto cardDto,
+                                                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "user/personal-edit";
+            return new ResponseEntity<>(new HashSet<>(bindingResult.getAllErrors()), HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                userService.update(cardDto);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } catch (ServiceException e) {
+                log.error(e.getMessage());
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
-        try {
-            userService.update(cardDto);
-        } catch (ServiceException e) {
-            log.error(e.getMessage());
-        }
-        return "redirect:/user/personal";
     }
 }
+

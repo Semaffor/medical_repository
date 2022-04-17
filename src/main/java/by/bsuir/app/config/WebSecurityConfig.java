@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -33,12 +34,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-                http.authorizeRequests()
+                http
+                    .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+                    .authorizeRequests()
                     .antMatchers(HOME_PAGE_URL, "/static/**", "/auth/**").permitAll()
-                    .antMatchers("/admin/**", "/user/personal/edit/**").hasAuthority(Role.ADMIN.name())
+                    .antMatchers("/user/personal/edit/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
+                    .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
                     .antMatchers("/user/**").hasAuthority(Role.USER.name())
                     .antMatchers("/doctor/**").hasAuthority(Role.DOCTOR.name())
-                    .anyRequest().authenticated()
+                .anyRequest().authenticated()
+//                        .and().httpBasic();
                 .and().formLogin()
                     .loginPage("/auth/logIn").permitAll()
                     .loginProcessingUrl("/auth/authentication")
