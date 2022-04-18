@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <!--    <th:block th:include="/common/fragments-util :: doctype-html-head-tags-begin"/>-->
     <th:block th:include="/common/fragments-util :: head"/>
@@ -13,8 +13,8 @@
 <div class="main head-block">
     <div class="container">
         <div class="row">
-            <table class="table">
-                <thead class="th">
+            <table class="table table-striped">
+                <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
                     <th class="text-center" scope="col" th:text="#{login.username}">First</th>
