@@ -64,7 +64,3 @@ body{
     display: flex;
     align-items: center;
 }
-
-.success, .fail {
-    display: none;
-}

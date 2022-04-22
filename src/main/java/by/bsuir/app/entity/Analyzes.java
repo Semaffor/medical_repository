@@ -9,7 +9,7 @@ import java.util.Date;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"user"}, callSuper = true)
 public abstract class Analyzes<T extends Identifiable> extends BaseEntity{
 
     private static final long serialVersionUID = 1L;

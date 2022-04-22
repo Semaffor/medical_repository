@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class UserDaoImpl extends AbstractDao<User> implements UserDao<User> {
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     public UserDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory, User.class);

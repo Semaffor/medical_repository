@@ -5,7 +5,7 @@ import by.bsuir.app.exception.DaoException;
 
 import java.util.Optional;
 
-public interface UserDao<T> extends Dao<User>{
-    Optional<T> findByUsername(String username) throws DaoException;
-    Optional<T> findByEmail(String email) throws DaoException;
+public interface UserDao extends Dao<User>{
+    Optional<User> findByUsername(String username) throws DaoException;
+    Optional<User> findByEmail(String email) throws DaoException;
 }

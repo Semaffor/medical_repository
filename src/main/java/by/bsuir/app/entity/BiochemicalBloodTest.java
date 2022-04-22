@@ -10,7 +10,7 @@ import java.util.Optional;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"user"}, callSuper = true)
 @Entity
 public class BiochemicalBloodTest extends Analyzes<BiochemicalBloodTest> {
 
@@ -19,4 +19,7 @@ public class BiochemicalBloodTest extends Analyzes<BiochemicalBloodTest> {
     private double protein;
     private double glucose;
     private double cholesterol;
+
+    @ManyToOne
+    private User user;
 }

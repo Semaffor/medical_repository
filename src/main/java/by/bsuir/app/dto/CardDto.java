@@ -16,16 +16,16 @@ public class CardDto {
     private final static int MAX_STRING_LENGTH = 28;
     private Long id;
 
-    @NotBlank()
+    @NotBlank
 //    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "Min length")
     private String username;
 
-    @NotBlank()
+    @NotBlank
     @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH)
     private String name;
 
     @NotBlank
-    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH)
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{smth}")
     private String surname;
 
     @NotBlank
@@ -39,9 +39,9 @@ public class CardDto {
     @Pattern(regexp = "^(\\d{9})", message = "+375 - XXXXXXXXX")
     private String mobile;
 
-    //TODO DateValidator
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past
     private Date birthday;
 
     @NotNull

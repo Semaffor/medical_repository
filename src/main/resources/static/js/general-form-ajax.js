@@ -23,3 +23,11 @@ function generalFormAjax(method, url, csrfToken, data) {
         }
     })
 }
+
+function getCsrfTokenFromCookie() {
+    return document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+}
+
+function getDataFromFormById(formId) {
+    return Object.fromEntries(new FormData(document.forms[String(formId)]).entries());
+}

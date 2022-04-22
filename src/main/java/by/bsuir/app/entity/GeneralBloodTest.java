@@ -2,10 +2,7 @@ package by.bsuir.app.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Optional;
 
@@ -13,7 +10,6 @@ import java.util.Optional;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
 public class GeneralBloodTest extends Analyzes<GeneralBloodTest> {
 
@@ -22,4 +18,5 @@ public class GeneralBloodTest extends Analyzes<GeneralBloodTest> {
     private double erythrocytes;
     private double leukocytes;
     private double hemoglobinValue;
+
 }

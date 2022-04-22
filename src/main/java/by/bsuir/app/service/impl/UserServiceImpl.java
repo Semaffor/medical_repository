@@ -21,9 +21,9 @@ import java.util.*;
 @Transactional
 public class UserServiceImpl extends AbstractService<User> implements UserService {
 
-    private final UserDao<User> userDao;
+    private final UserDao userDao;
 
-    public UserServiceImpl(UserDao<User> userDao) {
+    public UserServiceImpl(UserDao userDao) {
         super(userDao);
         this.userDao = userDao;
     }
