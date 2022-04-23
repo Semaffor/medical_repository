@@ -2,7 +2,7 @@ $('#bio_btn_close').click(() => {
     $('#biochemical_blood_modal').modal('hide');
     hideLabel(".fail", 'slow');
 })
-$('#gen_btn_close').click(() => {
+$('#general_btn_close').click(() => {
     $('#general_blood_modal').modal('hide');
     hideLabel(".fail", 'slow');
 })

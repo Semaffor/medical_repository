@@ -8,20 +8,27 @@ function generalFormAjax(method, url, csrfToken, data) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: (response) => {
-            $(".fail").hide('slow');
             $(".success").show('slow');
+            hideElementAfterTime(".success", 2000, 'slow');
         },
         error: (errors) => {
-            $(".success").hide('slow');
             $(".fail").show('slow');
+            hideElementAfterTime(".fail", 2000, 'slow');
             errors['responseJSON'].forEach(
                 error => {
-                    const field = error['field'];
-                    $("." + field + "_error").html(error['defaultMessage']).show('slow')
+                    const generatedElementClassName = "." + error['field'] + "_error";
+                    $(generatedElementClassName).html(error['defaultMessage']).show('slow')
+                    hideElementAfterTime(generatedElementClassName, 3000, 'slow');
                 }
             )
         }
     })
+}
+
+function hideElementAfterTime(elem, time, velocity) {
+    setTimeout(() => {
+        $(String(elem)).hide(String(velocity));
+    }, time)
 }
 
 function getCsrfTokenFromCookie() {
