@@ -19,7 +19,4 @@ public class BiochemicalBloodTest extends Analyzes<BiochemicalBloodTest> {
     private double protein;
     private double glucose;
     private double cholesterol;
-
-    @ManyToOne
-    private User user;
 }

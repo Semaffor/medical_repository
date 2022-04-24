@@ -18,5 +18,4 @@ public class GeneralBloodTest extends Analyzes<GeneralBloodTest> {
     private double erythrocytes;
     private double leukocytes;
     private double hemoglobinValue;
-
 }

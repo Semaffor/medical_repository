@@ -76,7 +76,9 @@ public class HibernateConfig {
 
         properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+//        properties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        properties.setProperty("hibernate.physical_naming_strategy", env.getProperty("hibernate.physical_naming_strategy"));
 
         return properties;
     }

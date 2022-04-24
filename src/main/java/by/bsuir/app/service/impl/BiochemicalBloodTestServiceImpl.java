@@ -29,7 +29,7 @@ public class BiochemicalBloodTestServiceImpl extends AbstractService<Biochemical
 
     @Override
     @Transactional
-    public void save(BiochemicalBloodTestDto testDto) throws ServiceException {
+    public BiochemicalBloodTest save(BiochemicalBloodTestDto testDto) throws ServiceException {
         BiochemicalBloodTest test = new BiochemicalBloodTest();
         try {
             Optional<User> userOptional = userDao.findByUsername(testDto.getUsername());
@@ -41,6 +41,8 @@ public class BiochemicalBloodTestServiceImpl extends AbstractService<Biochemical
                 test.setCreatedOn(new Date());
                 bloodTestDao.save(test);
             }
+
+            return test;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

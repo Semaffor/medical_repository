@@ -48,19 +48,18 @@ public class AnalyzesController {
             return new ResponseEntity<>(biochemicalBloodTestService.save(dto), HttpStatus.CREATED);
         } catch (ServiceException e) {
             log.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @ResponseBody
     @PostMapping("/add/generalBlood/{username}")
     public ResponseEntity<GeneralBloodTest> addGeneralBloodTest(@RequestBody @Valid GeneralBloodTestDto dto) {
-            try {
-                return new ResponseEntity<>(generalBloodTestService.save(dto), HttpStatus.CREATED);
-            } catch (ServiceException e) {
-                log.error(e.getMessage());
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+        try {
+            return new ResponseEntity<>(generalBloodTestService.save(dto), HttpStatus.CREATED);
+        } catch (ServiceException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

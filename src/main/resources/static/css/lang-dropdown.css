@@ -1,8 +1,8 @@
-li {
+.languages_dropdown li {
     list-style-type: none;
 }
 
-ul {
+.languages_dropdown ul {
     display: flex;
     justify-content: end;
     margin-right: 20px;

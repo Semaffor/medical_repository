@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!--    <th:block th:include="/common/fragments-util :: doctype-html-head-tags-begin"/>-->
+    <th:block th:include="/common/fragments-util :: head"/>
+
+    <link th:href="@{/static/css/head-pages-descriptions.css}" rel="stylesheet"/>
+    <link th:href="@{/static/css/home.css}" rel="stylesheet"/>
+    <link th:href="@{/static/css/conclusions.css}" rel="stylesheet"/>
+    <title th:text="#{navbar.brand}"></title>
+</head>
+<body>
+<div th:replace="/common/fragments-page :: header"/>
+<div class="head-block text-center">
+    <div class="head element">
+        <h2>Lorem ipsum dolor.</h2>
+    </div>
+    <div class="center element">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda cupiditate dolore dolorem ea quod
+        reprehenderit saepe? Earum quis recusandae reprehenderit.
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="row custom_row">
+            <div class="col-3 col-xl-2">
+                <div id="menu" class="vertical-menu">
+                    <a class="menu__item" th:text="#{analyzes.blood.general.title}">Link 1</a>
+                    <a class="menu__item">Link 2</a>
+                </div>
+            </div>
+            <div class="col-9 col-xl-10">
+                <div id="analyzes">
+                    <div id="general_blood">
+                        <div class="analize_item">
+                            <span class="item_start" th:text="#{analyzes.blood.general.leukocytes}"></span>=
+                            <span id="leukocytes"></span>
+                        </div>
+                        <div class="analize_item">
+                            <span class="item_start" th:text="#{analyzes.blood.general.hemoglobinValue}"></span>=
+                            <span id="hemoglobinValue"></span>
+                        </div>
+                        <div class="analize_item">
+                            <span class="item_start" th:text="#{analyzes.blood.general.erythrocytes}"></span>=
+                            <span id="erythrocytes"></span>
+                        </div>
+                    </div>
+                    <div id="bio_blood">
+                        bio_blood
+                        <span th:text="#{analyzes.blood.general.leukocytes}"></span>=
+                        <span id="protein"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/fragments-page :: footer"/>
+<th:block th:include="/common/fragments-util :: bs-link-js"/>
+<th:block th:include="/common/fragments-util :: ajax-lib"/>
+<script th:src="@{/static/js/conclusions.js}"></script>
+</body>
+</html>

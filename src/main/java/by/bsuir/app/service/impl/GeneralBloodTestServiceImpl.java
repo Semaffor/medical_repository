@@ -27,7 +27,7 @@ public class GeneralBloodTestServiceImpl extends AbstractService<GeneralBloodTes
     }
 
     @Override
-    public void save(GeneralBloodTestDto testDto) throws ServiceException {
+    public GeneralBloodTest save(GeneralBloodTestDto testDto) throws ServiceException {
         GeneralBloodTest test = new GeneralBloodTest();
         try {
             Optional<User> userOptional = userDao.findByUsername(testDto.getUsername());
@@ -39,6 +39,7 @@ public class GeneralBloodTestServiceImpl extends AbstractService<GeneralBloodTes
                 test.setCreatedOn(new Date());
                 bloodTestDao.save(test);
             }
+            return test;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
