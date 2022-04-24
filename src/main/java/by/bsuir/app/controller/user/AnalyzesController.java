@@ -43,35 +43,27 @@ public class AnalyzesController {
 
     @ResponseBody
     @PostMapping("/add/bioBlood/{username}")
-    public ResponseEntity<?> addBioBloodTest(@RequestBody @Valid BiochemicalBloodTestDto dto,
-                                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new HashSet<>(bindingResult.getAllErrors()), HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                biochemicalBloodTestService.save(dto);
-                return new ResponseEntity<>(HttpStatus.OK);
-            } catch (ServiceException e) {
-                log.error(e.getMessage());
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+    public ResponseEntity<BiochemicalBloodTest> addBioBloodTest(@RequestBody @Valid BiochemicalBloodTestDto dto) {
+        try {
+            return new ResponseEntity<>(biochemicalBloodTestService.save(dto), HttpStatus.CREATED);
+        } catch (ServiceException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @ResponseBody
     @PostMapping("/add/generalBlood/{username}")
-    public ResponseEntity<?> addGeneralBloodTest(@RequestBody @Valid GeneralBloodTestDto dto,
-                                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new HashSet<>(bindingResult.getAllErrors()), HttpStatus.NOT_FOUND);
-        } else {
+    public ResponseEntity<GeneralBloodTest> addGeneralBloodTest(@RequestBody @Valid GeneralBloodTestDto dto) {
             try {
-                generalBloodTestService.save(dto);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(generalBloodTestService.save(dto), HttpStatus.CREATED);
             } catch (ServiceException e) {
                 log.error(e.getMessage());
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         }
     }
+
+//    @ResponseBody
+//    @PostMapping("/")
 }

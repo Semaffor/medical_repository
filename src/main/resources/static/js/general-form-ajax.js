@@ -14,10 +14,11 @@ function generalFormAjax(method, url, csrfToken, data) {
         error: (errors) => {
             $(".fail").show('slow');
             hideElementAfterTime(".fail", 2000, 'slow');
-            errors['responseJSON'].forEach(
+            let errorMap = errors['responseJSON'];
+            Object.keys(errorMap).forEach(
                 error => {
-                    const generatedElementClassName = "." + error['field'] + "_error";
-                    $(generatedElementClassName).html(error['defaultMessage']).show('slow')
+                    const generatedElementClassName = "." + error + "_error";
+                    $(generatedElementClassName).html(errorMap[error]).show('slow')
                     hideElementAfterTime(generatedElementClassName, 3000, 'slow');
                 }
             )
