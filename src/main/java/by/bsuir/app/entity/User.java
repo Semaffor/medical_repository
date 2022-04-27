@@ -11,6 +11,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"logInfos", "card"}, callSuper = false)
+//@ToString(exclude = {"generalBloodTests", "biochemicalBloodTests"})
 @Entity
 public class User extends BaseEntity {
 

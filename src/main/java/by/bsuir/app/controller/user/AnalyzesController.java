@@ -5,6 +5,7 @@ import by.bsuir.app.dto.GeneralBloodTestDto;
 import by.bsuir.app.entity.BiochemicalBloodTest;
 import by.bsuir.app.entity.GeneralBloodTest;
 import by.bsuir.app.exception.ServiceException;
+import by.bsuir.app.pagination.Paged;
 import by.bsuir.app.service.BiochemicalBloodTestService;
 import by.bsuir.app.service.GeneralBloodTestService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.HashSet;
 
 @Slf4j
 @Controller
@@ -63,6 +62,13 @@ public class AnalyzesController {
         }
     }
 
-//    @ResponseBody
-//    @PostMapping("/")
+    @ResponseBody
+    @GetMapping("/generalBlood/{username}")
+    public Paged<GeneralBloodTest> findAllGeneralBloodWithPagination(
+            @PathVariable String username, @CookieValue(value = "lang", defaultValue = "ru") String lang,
+            @RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+            @RequestParam(value = "size", required = false, defaultValue = "1") int size) {
+        return generalBloodTestService.getPage(pageNumber, size, username, lang);
+    }
+
 }

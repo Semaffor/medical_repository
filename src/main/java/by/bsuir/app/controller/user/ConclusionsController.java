@@ -12,7 +12,9 @@ import java.security.Principal;
 @RequestMapping("/user/conclusions")
 public class ConclusionsController {
     @GetMapping("")
-    private String showConclusionsPage() {
+    private String showConclusionsPage(Principal principal, Model model) {
+        model.addAttribute("username", principal.getName());
+        model.addAttribute("posts", null);
         return "user/conclusions";
     }
 }

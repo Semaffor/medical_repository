@@ -4,7 +4,7 @@
 <head>
     <!--        <th:block th:include="/common/fragments-util :: doctype-html-head-tags-begin"/>-->
     <th:block th:include="/common/fragments-util :: head"/>
-    <th:block th:include="/common/fragments-util :: ajax-lib"/>
+    <th:block th:include="/common/fragments-util :: jQuery-lib"/>
 
     <link th:href="@{/static/css/head-pages-descriptions.css}" rel="stylesheet"/>
     <link th:href="@{/static/css/analyzes.css}" rel="stylesheet"/>
@@ -65,7 +65,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" th:text="#{analyzes.blood.biochemical.title}"></h5>
+                <h5 class="modal-title" th:text="#{analyzes.blood.biochemical.title.add}"></h5>
             </div>
             <div class="modal-body">
                 <form action="#" id="add_biochemical_blood_form" th:object="${bio_blood}">

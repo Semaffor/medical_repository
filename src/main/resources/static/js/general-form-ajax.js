@@ -26,6 +26,20 @@ function generalFormAjax(method, url, csrfToken, data) {
     })
 }
 
+function generalFormAjaxGet(url, data) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: (response) => {
+
+        },
+        error: (errors) => {
+
+        }
+    })
+}
 function hideElementAfterTime(elem, time, velocity) {
     setTimeout(() => {
         $(String(elem)).hide(String(velocity));

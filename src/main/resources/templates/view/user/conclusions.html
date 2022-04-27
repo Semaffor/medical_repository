@@ -27,24 +27,56 @@
             <div class="col-3 col-xl-2">
                 <div id="menu" class="vertical-menu">
                     <a class="menu__item" th:text="#{analyzes.blood.general.title}">Link 1</a>
-                    <a class="menu__item">Link 2</a>
+                    <a class="menu__item" th:text="#{analyzes.blood.biochemical.title}">Link 2</a>
                 </div>
             </div>
+            <input type="hidden" id="username" th:value="${username}">
+
             <div class="col-9 col-xl-10">
                 <div id="analyzes">
                     <div id="general_blood">
-                        <div class="analize_item">
-                            <span class="item_start" th:text="#{analyzes.blood.general.leukocytes}"></span>=
-                            <span id="leukocytes"></span>
-                        </div>
-                        <div class="analize_item">
-                            <span class="item_start" th:text="#{analyzes.blood.general.hemoglobinValue}"></span>=
-                            <span id="hemoglobinValue"></span>
-                        </div>
-                        <div class="analize_item">
-                            <span class="item_start" th:text="#{analyzes.blood.general.erythrocytes}"></span>=
-                            <span id="erythrocytes"></span>
-                        </div>
+                        <table class="table table-hover mb-5">
+                            <thead>
+                            <tr class="text-center">
+                                <th th:text="#{analyzes.blood.table.indicator}"/>
+                                <th th:text="#{analyzes.blood.table.result}"/>
+                                <th th:text="#{analyzes.blood.table.units}"/>
+                                <th/>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr><th th:text="#{analyzes.blood.general.leukocytes}"></th>
+                                <td class="text-center" id="leukocytes_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.general.unit.leukocytes}"></td>
+                                <td><span id="leukocytesState_value" class="state_value"></span></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{analyzes.blood.general.hemoglobinValue}"></th>
+                                <td class="text-center" id="hemoglobinValue_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.unit.g-l}"></td>
+                                <td><span id="hemoglobinState_value" class="state_value"></span></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{analyzes.blood.general.erythrocytes}"></th>
+                                <td class="text-center" id="erythrocytes_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.general.unit.erythrocytes}"></td>
+                                <td><span id="erythrocytesState_value" class="state_value"></span></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{analyzes.blood.created}"></th>
+                                <td colspan="3" class="text-center" id="createdOn_value"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{analyzes.blood.attending-doctor}"></th>
+                                <td colspan="3" class="text-center" id="attendingDoctor_value"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{analyzes.blood.recommendations}"></th>
+                                <td colspan="3" class="text-center" id="result_value"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="pagination-bar"></div>
                     </div>
                     <div id="bio_blood">
                         bio_blood
@@ -53,12 +85,34 @@
                     </div>
                 </div>
             </div>
+
+<!--            <nav aria-label="Page navigation" class="paging">-->
+<!--                <ul class="pagination">-->
+<!--                    <li class="page-item">-->
+<!--                        <a class="page-link" th:href="@{'/?pageNumber=' + ${posts.paging.pageNumber - 1}}"-->
+<!--                           tabindex="-1">Previous</a>-->
+<!--                    </li>-->
+<!--                    <th:block th:each="item : ${posts?.paging.getItems()}">-->
+<!--                        <li class="page-item" th:classappend="${item.index == posts.paging.pageNumber? 'active' : ''}"-->
+<!--                            th:if="${item.pageItemType.name() == 'PAGE'}">-->
+<!--                            <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"-->
+<!--                               th:text="${item.index}"></a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">-->
+<!--                            <a class="page-link" href="#">...</a>-->
+<!--                        </li>-->
+<!--                    </th:block>-->
+<!--                    <li class="page-item" th:classappend="${!posts?.paging.isNextEnabled()? 'disabled' : ''}">-->
+<!--                        <a class="page-link" th:href="@{'/?pageNumber=' + ${posts?.paging.pageNumber + 1}}">Next</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </nav>-->
         </div>
     </div>
 </div>
 <div th:replace="/common/fragments-page :: footer"/>
 <th:block th:include="/common/fragments-util :: bs-link-js"/>
-<th:block th:include="/common/fragments-util :: ajax-lib"/>
+<th:block th:include="/common/fragments-util :: jQuery-lib"/>
 <script th:src="@{/static/js/conclusions.js}"></script>
 </body>
 </html>

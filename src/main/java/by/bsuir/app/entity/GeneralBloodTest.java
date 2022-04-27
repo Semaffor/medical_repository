@@ -1,5 +1,6 @@
 package by.bsuir.app.entity;
 
+import by.bsuir.app.entity.enums.State;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,6 +17,14 @@ public class GeneralBloodTest extends Analyzes<GeneralBloodTest> {
     private static final long serialVersionUID = 1L;
 
     private double erythrocytes;
+    @Transient
+    private String erythrocytesState;
+
     private double leukocytes;
+    @Transient
+    private String leukocytesState;
+
     private double hemoglobinValue;
+    @Transient
+    private String hemoglobinState;
 }

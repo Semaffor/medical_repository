@@ -7,9 +7,15 @@ import by.bsuir.app.entity.GeneralBloodTest;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
+import by.bsuir.app.pagination.Page;
+import by.bsuir.app.pagination.Paged;
+import by.bsuir.app.pagination.Paging;
 import by.bsuir.app.service.AbstractService;
 import by.bsuir.app.service.GeneralBloodTestService;
+import by.bsuir.app.util.indicator.GeneralBloodIndicatorHandler;
+import by.bsuir.app.util.indicator.IndicatorHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
@@ -24,6 +30,15 @@ public class GeneralBloodTestServiceImpl extends AbstractService<GeneralBloodTes
         super(bloodTestDao);
         this.bloodTestDao = bloodTestDao;
         this.userDao = userDao;
+    }
+
+    @Override
+    @Transactional
+    public Paged<GeneralBloodTest> getPage(int pageNumber, int size, String username, String lang) {
+        Page<GeneralBloodTest> postPage = bloodTestDao.findAllByUsername(pageNumber - 1, size, username);
+        IndicatorHandler<GeneralBloodTest> ih = new GeneralBloodIndicatorHandler(lang);
+        ih.processIndicators(postPage.getObject());
+        return new Paged<>(postPage, Paging.of(bloodTestDao.findAllCountByUsername(username), pageNumber, size));
     }
 
     @Override
