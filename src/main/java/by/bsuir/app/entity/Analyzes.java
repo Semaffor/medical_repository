@@ -1,5 +1,6 @@
 package by.bsuir.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public abstract class Analyzes<T extends Identifiable> extends BaseEntity{
     @JoinColumn(name = "user_id")
     protected User user;
 
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     protected Date createdOn;
     protected String result;
 }
