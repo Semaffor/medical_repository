@@ -100,6 +100,7 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        localeResolver.setCookieName("lang");
         localeResolver.setDefaultLocale(new Locale("ru"));
         return localeResolver;
     }

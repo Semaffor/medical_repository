@@ -19,13 +19,13 @@ public class BiochemicalBloodTest extends Analyzes<BiochemicalBloodTest> {
 
     private double protein;
     @Transient
-    private State proteinState;
+    private String proteinState;
 
     private double glucose;
     @Transient
-    private State glucoseState;
+    private String glucoseState;
 
     private double cholesterol;
     @Transient
-    private State cholesterolState;
+    private String cholesterolState;
 }

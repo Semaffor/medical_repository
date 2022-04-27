@@ -15,6 +15,7 @@ public class GeneralBloodIndicatorHandler implements IndicatorHandler<GeneralBlo
     private final static double LEUKOCYTES_MAX = 17;
     private final static double HEMOGLOBIN_MIN = 110;
     private final static double HEMOGLOBIN_MAX = 146;
+
     private final String lang;
 
     public GeneralBloodIndicatorHandler(String lang) {
@@ -42,7 +43,6 @@ public class GeneralBloodIndicatorHandler implements IndicatorHandler<GeneralBlo
     }
 
     private State getErythrocytesState(double value) {
-
         if (value < ERYTHROCYTES_MIN) {
             return State.LOW;
         } else if (value > ERYTHROCYTES_MAX) {

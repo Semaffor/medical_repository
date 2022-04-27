@@ -52,6 +52,16 @@ public class AnalyzesController {
     }
 
     @ResponseBody
+    @GetMapping("/bioBlood/{username}")
+    public Paged<BiochemicalBloodTest> findAllBiochemicalBloodWithPagination(
+            @PathVariable String username, @CookieValue(value = "lang", defaultValue = "ru") String lang,
+            @RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+            @RequestParam(value = "size", required = false, defaultValue = "1") int size
+    ) {
+        return biochemicalBloodTestService.getPage(pageNumber, size, username, lang);
+    }
+
+    @ResponseBody
     @PostMapping("/add/generalBlood/{username}")
     public ResponseEntity<GeneralBloodTest> addGeneralBloodTest(@RequestBody @Valid GeneralBloodTestDto dto) {
         try {

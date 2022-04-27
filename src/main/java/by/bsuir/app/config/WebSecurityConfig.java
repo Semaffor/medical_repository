@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
                 http
+//                        .csrf().disable();
                     .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                     .authorizeRequests()
@@ -44,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/user/**").hasAuthority(Role.USER.name())
                     .antMatchers("/doctor/**").hasAuthority(Role.DOCTOR.name())
                 .anyRequest().authenticated()
-//                        .and().httpBasic();
                 .and().formLogin()
                     .loginPage("/auth/logIn").permitAll()
                     .loginProcessingUrl("/auth/authentication")

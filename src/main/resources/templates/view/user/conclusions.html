@@ -62,27 +62,71 @@
                                 <td class="text-center" th:text="#{analyzes.blood.general.unit.erythrocytes}"></td>
                                 <td><span id="erythrocytesState_value" class="state_value"></span></td>
                             </tr>
-                            <tr>
-                                <th th:text="#{analyzes.blood.created}"></th>
-                                <td colspan="3" class="text-center" id="createdOn_value"></td>
+<!--                            <tr>-->
+<!--                                <th th:text="#{analyzes.blood.created}"></th>-->
+<!--                                <td colspan="3" class="text-center" id="createdOn_value"></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th th:text="#{analyzes.blood.attending-doctor}"></th>-->
+<!--                                <td colspan="3" class="text-center" id="attendingDoctor_value"></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th th:text="#{analyzes.blood.recommendations}"></th>-->
+<!--                                <td colspan="3" class="text-center" id="result_value"></td>-->
+<!--                            </tr>-->
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div id="bio_blood">
+                        <table class="table table-hover mb-5">
+                            <thead>
+                            <tr class="text-center">
+                                <th th:text="#{analyzes.blood.table.indicator}"/>
+                                <th th:text="#{analyzes.blood.table.result}"/>
+                                <th th:text="#{analyzes.blood.table.units}"/>
+                                <th/>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr><th th:text="#{analyzes.blood.biochemical.protein}"></th>
+                                <td class="text-center" id="protein_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.unit.g-l}"></td>
+                                <td><span id="proteinState_value" class="state_value"></span></td>
                             </tr>
                             <tr>
-                                <th th:text="#{analyzes.blood.attending-doctor}"></th>
-                                <td colspan="3" class="text-center" id="attendingDoctor_value"></td>
+                                <th th:text="#{analyzes.blood.biochemical.glucose}"></th>
+                                <td class="text-center" id="glucose_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.biochemical.unit.glucose}"></td>
+                                <td><span id="glucoseState_value" class="state_value"></span></td>
                             </tr>
                             <tr>
-                                <th th:text="#{analyzes.blood.recommendations}"></th>
-                                <td colspan="3" class="text-center" id="result_value"></td>
+                                <th th:text="#{analyzes.blood.biochemical.cholesterol}"></th>
+                                <td class="text-center" id="cholesterol_value"></td>
+                                <td class="text-center" th:text="#{analyzes.blood.biochemical.unit.cholesterol}"></td>
+                                <td><span id="cholesterolState_value" class="state_value"></span></td>
                             </tr>
                             </tbody>
                         </table>
-                        <div id="pagination-bar"></div>
                     </div>
-                    <div id="bio_blood">
-                        bio_blood
-                        <span th:text="#{analyzes.blood.general.leukocytes}"></span>=
-                        <span id="protein"></span>
-                    </div>
+
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th th:text="#{analyzes.blood.created}"></th>
+                            <td colspan="3" class="text-center" id="createdOn_value"></td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{analyzes.blood.attending-doctor}"></th>
+                            <td colspan="3" class="text-center" id="attendingDoctor_value"></td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{analyzes.blood.recommendations}"></th>
+                            <td colspan="3" class="text-center" id="result_value"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="pagination-bar"></div>
                 </div>
             </div>
 

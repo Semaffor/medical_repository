@@ -79,7 +79,7 @@ function openTab(i) {
         }
         case 2: {
             changeVisible('#bio_blood', '#general_blood')
-            url_global = "http://localhost:8080/user/analyzes/generalBlood/" + username;
+            url_global = "http://localhost:8080/user/analyzes/bioBlood/" + username;
             loadData(url_global + "?pageNumber=1&size=1");
             $('#protein').html("22");
         }
