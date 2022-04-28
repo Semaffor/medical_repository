@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import by.bsuir.app.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,24 +12,24 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"logInfos", "card"}, callSuper = false)
-//@ToString(exclude = {"generalBloodTests", "biochemicalBloodTests"})
+@JsonIgnoreProperties(value = {"biochemicalBloodTests", "generalBloodTests", "card", "logInfos", "password"})
 @Entity
 public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, columnDefinition = "b'0'")
+    @Column(nullable = false, columnDefinition = "bit default b'0'")
     private boolean isBlocked;
-    @Column(nullable = false, columnDefinition = "b'0'")
+    @Column(nullable = false, columnDefinition = "bit default b'1'")
     private boolean isMonitored;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -57,7 +58,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.REFRESH)
     Set<LogInfo> logInfos = new HashSet<>();
 
     public void addLogInfo(LogInfo logInfo) {

@@ -3,10 +3,7 @@ package by.bsuir.app.entity;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -19,5 +16,7 @@ public abstract class BaseEntity implements Serializable, Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
+    @Column(columnDefinition = "bit default b'0'")
     protected boolean is_deleted;
 }

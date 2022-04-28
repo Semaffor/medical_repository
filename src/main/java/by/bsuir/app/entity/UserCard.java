@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import by.bsuir.app.entity.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,8 @@ public class UserCard extends BaseEntity {
    private String name;
    private String surname;
    private String thirdName;
+
+   @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
    private Date birthday;
    private String mobile;
 
