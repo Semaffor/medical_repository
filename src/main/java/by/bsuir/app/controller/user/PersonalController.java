@@ -25,8 +25,6 @@ import java.util.Optional;
 @RequestMapping("/user/personal")
 public class PersonalController {
 
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAIL = "FAIL";
     private final UserService userService;
 
     public PersonalController(UserService userService) {
@@ -76,18 +74,12 @@ public class PersonalController {
 
     @PostMapping("/edit/{username}")
     @ResponseBody
-    private ResponseEntity<?> editPersonalData(@RequestBody @Valid CardDto cardDto,
-                                                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new HashSet<>(bindingResult.getAllErrors()), HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                userService.update(cardDto);
-                return new ResponseEntity<>(HttpStatus.OK);
-            } catch (ServiceException e) {
-                log.error(e.getMessage());
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+    private ResponseEntity<CardDto> editPersonalData(@RequestBody @Valid CardDto cardDto) {
+        try {
+            return new ResponseEntity<>(userService.update(cardDto), HttpStatus.CREATED);
+        } catch (ServiceException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
