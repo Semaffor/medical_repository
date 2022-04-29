@@ -3,28 +3,27 @@ package by.bsuir.app.dto;
 import by.bsuir.app.validation.PasswordMatches;
 import lombok.Data;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 @Data
 @PasswordMatches
 public class UserRegistrationDto {
-    @NotEmpty(message = "1")
-    @NotBlank(message = "1")
+
+    private final static int MIN_STRING_LENGTH = 3;
+    private final static int MAX_STRING_LENGTH = 28;
+
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.field.empty}")
     private String username;
 
-    @NotEmpty(message = "1")
-    @NotBlank(message = "1")
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.field.empty}")
     private String password;
     private String matchingPassword;
 
-    @Email(regexp = ".+[@].+[\\.].+")
-    @NotEmpty(message = "1")
-    @NotBlank(message = "1")
+    @Size
+    @NotBlank(message = "{dto.empty}")
+    @Email(regexp = "[\\S._%+-]+@[\\S.-]+\\.[\\S]{2,}", message = "{dto.card.email.pattern}")
     private String email;
 
-    @AssertTrue(message = "1")
+    @AssertTrue(message = "{dto.registration.check}")
     boolean confirmation;
 }

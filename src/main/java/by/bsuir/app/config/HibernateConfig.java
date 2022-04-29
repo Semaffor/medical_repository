@@ -50,7 +50,6 @@ public class HibernateConfig {
         dataSource.setConnectionTimeout(getIntProperty("connection.pool.timeout"));
         dataSource.setMinimumIdle(getIntProperty("connection.pool.minimum-idle"));
         dataSource.setMaximumPoolSize(getIntProperty("connection.pool.maximum-pool-size"));
-        dataSource.setIdleTimeout(getIntProperty("connection.pool.idle-timeout"));
         dataSource.setMaxLifetime(getIntProperty("connection.pool.max-lifetime"));
 //        dataSource.setAutoCommit(Boolean.parseBoolean(env.getProperty("connection.pool.auto-commit")));
 

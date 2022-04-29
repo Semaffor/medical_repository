@@ -14,37 +14,39 @@ public class CardDto {
 
     private final static int MIN_STRING_LENGTH = 3;
     private final static int MAX_STRING_LENGTH = 28;
+
     private Long id;
 
-    @NotBlank
-//    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "Min length")
+    @NotBlank(message = "{dto.empty}")
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String username;
 
-    @NotBlank
-    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH)
+    @NotBlank(message = "{dto.empty}")
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String name;
 
-    @NotBlank
-    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{smth}")
+    @NotBlank(message = "{dto.empty}")
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String surname;
 
-    @NotBlank
-    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH)
+    @NotBlank(message = "{dto.empty}")
+    @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String thirdName;
 
-    @Email
+    @NotBlank(message = "{dto.empty}")
+    @Email(regexp = "[\\S._%+-]+@[\\S.-]+\\.[\\S]{2,}", message = "{dto.card.email.pattern}")
     private String email;
 
-    @NotNull
-    @Pattern(regexp = "^(\\d{9})", message = "+375 - XXXXXXXXX")
+    @NotNull(message = "{dto.empty}")
+    @Pattern(regexp = "^(\\d{2})-(\\d{7})", message = "+375 - XX-XXXXXXX")
     private String mobile;
 
-    @NotNull
+    @NotNull(message = "{dto.empty}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
+    @Past(message = "{dto.card.date.past}")
     private Date birthday;
 
-    @NotNull
+    @NotNull(message = "{dto.card.sex.empty}")
     private Gender gender;
 
     public static CardDto fromUser(User user) {

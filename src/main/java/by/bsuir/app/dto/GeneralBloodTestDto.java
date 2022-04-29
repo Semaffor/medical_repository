@@ -7,16 +7,19 @@ import javax.validation.constraints.*;
 @Data
 public class GeneralBloodTestDto {
 
-    @DecimalMin(value = "20.0")
-    @DecimalMax(value = "0.001")
+    private final static String MIN = "0.01";
+    private final static String MAX = "200.0";
+
+    @DecimalMin(value = MIN, message = "{dto.test.value.min}")
+    @DecimalMax(value = MAX, message = "{dto.test.value.max}")
     private double erythrocytes;
 
-    @DecimalMin(value = "20.0")
-    @DecimalMax(value = "0.001")
+    @DecimalMin(value = MIN, message = "{dto.test.value.min}")
+    @DecimalMax(value = MAX, message = "{dto.test.value.max}")
     private double leukocytes;
 
-    @DecimalMin(value = "20.0")
-    @DecimalMax(value = "0.001")
+    @DecimalMin(value = MIN, message = "{dto.test.value.min}")
+    @DecimalMax(value = MAX, message = "{dto.test.value.max}")
     private double hemoglobinValue;
 
     private String username;
