@@ -8,3 +8,7 @@
 .success, .fail {
     display: none;
 }
+
+.disable {
+    display: none;
+}

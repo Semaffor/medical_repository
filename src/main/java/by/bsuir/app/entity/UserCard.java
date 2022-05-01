@@ -2,6 +2,7 @@ package by.bsuir.app.entity;
 
 import by.bsuir.app.entity.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"user"}, callSuper = true)
 @Entity
+@JsonIgnoreProperties(value = {"user"})
 public class UserCard extends BaseEntity {
 
    private static final long serialVersionUID = 1L;

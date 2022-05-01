@@ -61,8 +61,8 @@
                                 <h6 class="mb-0" th:text="#{profile.gender}">Gender</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <span th:if="${user.card?.gender.name() eq 'MALE'}" th:text="#{profile.gender.male}"/>
-                                <span th:if="${user.card?.gender.name() eq 'FEMALE'}" th:text="#{profile.gender.female}"/>
+                                <span th:if="${user.card?.gender?.name() eq 'MALE'}" th:text="#{profile.gender.male}"/>
+                                <span th:if="${user.card?.gender?.name() eq 'FEMALE'}" th:text="#{profile.gender.female}"/>
                             </div>
                         </div>
                         <hr>

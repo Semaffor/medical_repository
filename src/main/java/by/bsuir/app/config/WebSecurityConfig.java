@@ -35,26 +35,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
                 http
-//                        .csrf().disable();
-                    .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
-                    .authorizeRequests()
-                    .antMatchers(HOME_PAGE_URL, "/static/**", "/auth/**").permitAll()
-                    .antMatchers("/user/personal/edit/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
-                    .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-                    .antMatchers("/user/**").hasAuthority(Role.USER.name())
-                    .antMatchers("/doctor/**").hasAuthority(Role.DOCTOR.name())
-                .anyRequest().authenticated()
-                .and().formLogin()
-                    .loginPage("/auth/logIn").permitAll()
-                    .loginProcessingUrl("/auth/authentication")
-                    .defaultSuccessUrl(HOME_PAGE_URL, false)
-                .and().logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
-                    .invalidateHttpSession(true)
-                    .clearAuthentication(true)
-                    .deleteCookies("JSESSIONID")
-                    .logoutSuccessUrl(HOME_PAGE_URL);
+                        .csrf().disable();
+//                    .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                .and()
+//                    .authorizeRequests()
+//                    .antMatchers(HOME_PAGE_URL, "/static/**", "/auth/**").permitAll()
+//                    .antMatchers("/user/personal/edit/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
+//                    .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+//                    .antMatchers("/user/**").hasAuthority(Role.USER.name())
+//                    .antMatchers("/doctor/**").hasAuthority(Role.DOCTOR.name())
+//                .anyRequest().authenticated()
+//                .and().formLogin()
+//                    .loginPage("/auth/logIn").permitAll()
+//                    .loginProcessingUrl("/auth/authentication")
+//                    .defaultSuccessUrl(HOME_PAGE_URL, false)
+//                .and().logout()
+//                    .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+//                    .invalidateHttpSession(true)
+//                    .clearAuthentication(true)
+//                    .deleteCookies("JSESSIONID")
+//                    .logoutSuccessUrl(HOME_PAGE_URL);
 //                .and()
 //                    .rememberMe()
 //                    .tokenValiditySeconds(TOKEN_VALIDITY_SECONDS);

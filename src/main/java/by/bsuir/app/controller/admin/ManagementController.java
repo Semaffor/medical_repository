@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -43,5 +44,18 @@ public class ManagementController {
             log.error(e.getMessage());
         }
         return "redirect:/admin/management/";
+    }
+
+    @ResponseBody
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        try {
+            users =  userService.findAll();
+            return users;
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }

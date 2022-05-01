@@ -1,8 +1,11 @@
 package by.bsuir.app.service.impl;
 
+import by.bsuir.app.dao.Dao;
+import by.bsuir.app.dao.EmailValidationCodeDao;
 import by.bsuir.app.dao.UserDao;
 import by.bsuir.app.dto.CardDto;
 import by.bsuir.app.dto.UserRegistrationDto;
+import by.bsuir.app.entity.EmailValidationCode;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCard;
 import by.bsuir.app.entity.enums.Role;
@@ -11,6 +14,7 @@ import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.AbstractService;
 import by.bsuir.app.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +26,18 @@ import java.util.*;
 public class UserServiceImpl extends AbstractService<User> implements UserService {
 
     private final UserDao userDao;
+    private final EmailValidationCodeDao emailValidationCodeDao;
 
-    public UserServiceImpl(UserDao userDao) {
-        super(userDao);
+    @Value("${server.url}")
+    private String serverUrl;
+    private final MailSender mailSender;
+
+    public UserServiceImpl(Dao<User> dao, UserDao userDao, EmailValidationCodeDao emailValidationCodeDao,
+                           MailSender mailSender) {
+        super(dao);
         this.userDao = userDao;
+        this.emailValidationCodeDao = emailValidationCodeDao;
+        this.mailSender = mailSender;
     }
 
     @Override
@@ -35,7 +47,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     @Transactional
-    public void update(CardDto cardDto) throws ServiceException {
+    public CardDto update(CardDto cardDto) throws ServiceException {
         try {
             Optional<User> optionalUser = userDao.findById(cardDto.getId());
             if (optionalUser.isPresent()) {
@@ -57,6 +69,8 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
                 user.setCard(userCard);
                 userDao.update(user);
             }
+            return cardDto;
+
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -104,10 +118,15 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     @Transactional
     public User registerNewUserAccount(UserRegistrationDto userRegistrationDto, PasswordEncoder passwordEncoder) throws
-            UserAlreadyExistsException,
-            ServiceException {
+            UserAlreadyExistsException, ServiceException {
+
         if (findByUsername(userRegistrationDto.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("There is an account with the same login: "
+                    + userRegistrationDto.getUsername());
+        }
+
+        if (findByEmail(userRegistrationDto.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("There is an account with the same email: "
                     + userRegistrationDto.getUsername());
         }
 
@@ -117,8 +136,34 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         user.setEmail(userRegistrationDto.getEmail());
         user.setRoles(Set.of(Role.USER));
 
-        user.setId(userDao.save(user));
+        String uuidCode = UUID.randomUUID().toString();
+        EmailValidationCode code = new EmailValidationCode(uuidCode);
+        user.setActivationCode(code);
 
+        user.setId(userDao.save(user));
+        code.setUser(user);
+        emailValidationCodeDao.save(code);
+
+        String message = String.format(
+                "Welcome to Aduline. Follow the link for activation: %s",
+                serverUrl + "auth/activation/" + uuidCode);
+
+        mailSender.send(user.getEmail(), "Activation", message);
         return user;
+    }
+
+    @Override
+    @Transactional
+    public boolean activateUser(String code) {
+        Optional<User> userOptional = userDao.findByActivationCode(code);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setMonitored(true);
+            user.setActivationCode(null);
+            dao.update(user);
+
+            return true;
+        }
+        return false;
     }
 }

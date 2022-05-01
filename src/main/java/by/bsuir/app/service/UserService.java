@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface UserService extends Service<User> {
     void save(User user) throws ServiceException;
 
-    void update(CardDto cardDto) throws ServiceException;
+    CardDto update(CardDto cardDto) throws ServiceException;
     void update(User user) throws ServiceException;
     void changeBlockStatusByUsername(String username) throws ServiceException;
     Optional<User> findById(Long id) throws ServiceException;
@@ -20,4 +20,6 @@ public interface UserService extends Service<User> {
     Optional<User> findByEmail(String email) throws ServiceException;
     User registerNewUserAccount(UserRegistrationDto userRegistrationDto, PasswordEncoder passwordEncoder) throws UserAlreadyExistsException,
             ServiceException;
+
+    boolean activateUser(String code);
 }

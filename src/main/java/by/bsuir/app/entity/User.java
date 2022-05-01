@@ -3,6 +3,7 @@ package by.bsuir.app.entity;
 import by.bsuir.app.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.*;
@@ -12,7 +13,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"logInfos", "card"}, callSuper = false)
-@JsonIgnoreProperties(value = {"biochemicalBloodTests", "generalBloodTests", "card", "logInfos", "password"})
+@JsonIgnoreProperties(value = {"biochemicalBloodTests", "generalBloodTests",  "logInfos", "password"})
 @Entity
 public class User extends BaseEntity {
 
@@ -25,10 +26,12 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(nullable = false, unique = true)
+    @NaturalId
     private String email;
 
     @Column(nullable = false, columnDefinition = "bit default b'0'")
     private boolean isBlocked;
+
     @Column(nullable = false, columnDefinition = "bit default b'1'")
     private boolean isMonitored;
 
@@ -65,4 +68,8 @@ public class User extends BaseEntity {
         logInfos.add(logInfo);
         logInfo.setUser(this);
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private EmailValidationCode activationCode;
 }

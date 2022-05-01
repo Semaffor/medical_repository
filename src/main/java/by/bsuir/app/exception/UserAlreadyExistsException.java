@@ -1,6 +1,6 @@
 package by.bsuir.app.exception;
 
-public class UserAlreadyExistsException extends Exception {
+public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException() {
         super();
     }

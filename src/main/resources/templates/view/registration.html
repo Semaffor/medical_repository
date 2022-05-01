@@ -10,49 +10,54 @@
 <body>
 <div class="container-wrapper">
     <div class="container">
-        <form th:action="@{/auth/registration}" th:object="${user}" method="post">
+        <form id="form" th:action="@{/auth/registration}" th:object="${user}" method="post">
             <div class="title" th:text="#{reg.registration}"></div>
             <div class="input-box underline">
                 <input type="text" th:placeholder="#{login.username}" th:field="*{username}"
-                       name="username" autocomplete="off" autofocus required>
+                       name="username" autocomplete="off" autofocus>
                 <div class="underline"></div>
                 <p class="text_error_underline" th:each="error: ${#fields.errors('username')}" th:text="#{}">Validation
                     error</p>
-                <div class="text_error_underline" th:if="${param.alreadyExists}" th:text="#{reg.account.exists}"></div>
+                <div class="text_error_underline" th:if="${param.alreadyExists}" th:text="#{reg.account.username.exists}"></div>
+                <p id="username_error_text" class="text_error_underline"/>
             </div>
             <div class="input-box">
                 <input type="email" th:placeholder="#{reg.email}" th:field="*{email}" name="email"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                       autocomplete="off" minlength="3" maxlength="28">
                 <div class="underline"></div>
                 <p class="text_error_underline" th:each="error: ${#fields.errors('email')}" th:text="${error}"></p>
+                <p id="email_error_text" class="text_error_underline"/>
             </div>
             <div class="input-box">
                 <input type="password" th:placeholder="#{login.password}" th:field="*{password}" name="password"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                       autocomplete="off" minlength="3" maxlength="28">
                 <div class="underline"></div>
+                <p id="password_error_text" class="text_error_underline"/>
             </div>
             <div class="input-box">
                 <input type="password" th:placeholder="#{reg.password.repeat}" th:field="*{matchingPassword}"
-                       name="repeatedPassword"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                     autocomplete="off" minlength="3" maxlength="28">
                 <div class="underline"></div>
-                <p class="text_error_underline" th:each="error: ${#fields.errors('matchingPassword')}"
-                   th:text="${error}"></p>
+                <p class="text_error_underline" th:each="error: ${#fields.errors('matchingPassword')}"/>
+                <p id="repeat_pass_error_text" class="text_error_underline"/>
             </div>
-            <!--            <div class="form-check form-check-inline">-->
-            <!--                <label class="form-check-label mt-3">-->
-            <!--                    <input class="form-check-input" type="checkbox" th:field="*{confirmation}" name="confirmation" id="reg_confirmation"-->
-            <!--                           th:text="#{reg.accept.agreement}" value="checkedValue">-->
-            <!--                </label>-->
-            <!--                <p class="text_error_underline" th:each="error: ${#fields.errors('confirmation')}" th:text="${error}"></p>-->
-            <!--            </div>-->
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label mt-3">
+                                <input class="form-check-input" type="checkbox" th:field="*{confirmation}" name="confirmation" id="reg_confirmation"
+                                       th:text="#{reg.accept.agreement}" value="checkedValue">
+                            </label>
+                            <p class="text_error_underline" th:each="error: ${#fields.errors('confirmation')}" th:text="${error}"></p>
+                        </div>
+            <p id="confirmation_error_text" class="text_error_underline"/>
+
             <div th:if="${param.serviceEx}" th:text="#{reg.error}"></div>
             <!--            INSERT 'REQUIRED' FIELD-->
 
-<!--            <div class=" g-recaptcha col-sm-5 mt-3" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
-<!--            <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>-->
-            <div class="input-box button">
+            <div id="captcha"class="g-recaptcha col-sm-5 mt-4" th:attr="data-sitekey=${@environment.getProperty('google.recaptcha.key.site')}"></div>
+            <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>
+            <div class="input-box button mt-4">
                 <input type="submit" id="reg_button" th:value="#{reg.signUp}">
+                <div th:if="${message}" id="successRegistrationLabel" class="text-center alert-info" th:text="#{reg.success}"></div>
             </div>
         </form>
         <div class="title forgot">
@@ -61,6 +66,9 @@
     </div>
 </div>
 <th:block th:include="/common/fragments-util :: bs-link-js"/>
+<th:block th:include="/common/fragments-util :: jQuery-lib"/>
+<script th:src='@{/static/js/registration.js}'></script>
+<script th:src='@{/static/js/general-form-ajax.js}'></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>

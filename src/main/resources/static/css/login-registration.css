@@ -52,7 +52,7 @@ body {
     background: #fff;
     max-width: 350px;
     width: 100%;
-    padding: 25px 30px;
+    padding: 25px 25px;
     border-radius: 5px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
 }
@@ -147,4 +147,11 @@ body {
 
 .label {
     margin-top: 10px;
+}
+
+#captchaError {
+    display: block;
+    width: 100%;
+    font-size: .8em;
+    text-align: center;
 }

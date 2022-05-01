@@ -22,11 +22,10 @@
                        autocomplete="off" required>
                 <div class="underline"></div>
             </div>
-            <div th:if="${param.error}" class="alert alert-danger mt-4" th:text="#{login.incorrect.login-password}">
-            </div>
-
-            <div th:if="${param.logout}" class="alert alert-info mt-4" th:text="#{login.logout}">
-            </div>
+            <div th:if="${param.error}" class="alert alert-danger mt-4" th:text="#{login.incorrect.login-password}"></div>
+            <div th:if="${param.logout}" class="alert alert-info mt-4" th:text="#{login.logout}"></div>
+            <div th:if="${activated}" class="alert alert-info mt-2 mb-2 text-center" th:text="#{user.activation.success}"></div>
+            <div th:if="${failCode}" class="alert alert-warning mt-2 mb-2 text-center" th:text="#{user.activation.fail}"></div>
             <div class="input-box button">
                 <input type="submit" th:value="#{login.signIn}"/>
             </div>
