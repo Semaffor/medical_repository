@@ -16,6 +16,7 @@ public class EmailValidationCode extends BaseEntity {
     @NonNull
     private String validationCode;
 
-    @OneToOne(orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 }

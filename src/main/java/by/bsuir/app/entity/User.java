@@ -69,7 +69,9 @@ public class User extends BaseEntity {
         logInfo.setUser(this);
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private EmailValidationCode activationCode;
 }
