@@ -38,6 +38,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Override
     public void verifyCaptcha(String gRecaptchaResponse) {
         if (!responseSanityCheck(gRecaptchaResponse)) {
+            System.out.println(gRecaptchaResponse);
             throw new InvalidReCaptchaException("Response contains invalid characters");
         }
 

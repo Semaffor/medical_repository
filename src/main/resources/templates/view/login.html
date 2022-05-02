@@ -33,6 +33,12 @@
         <div class="title forgot">
             <a class="underlineHover" th:href="@{/auth/registration}" th:text="#{login.registration}"></a>
         </div>
+        <div class="title forgot">
+            <a class="underlineHover" th:href="@{/auth/reset/password}" th:text="#{login.forgot.password}"></a>
+        </div>
+        <div class="title forgot">
+            <a class="underlineHover" th:href="@{/}" th:text="#{label.to.main}"></a>
+        </div>
     </div>
 </div>
 <th:block th:include="/common/fragments-util :: bs-link-js"/>

@@ -1,7 +1,10 @@
 package by.bsuir.app.dto;
 
 import by.bsuir.app.validation.PasswordMatches;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
+import lombok.NonNull;
 
 import javax.validation.constraints.*;
 
@@ -26,4 +29,8 @@ public class UserRegistrationDto {
 
     @AssertTrue(message = "{dto.registration.check}")
     boolean confirmation;
+
+    @NotBlank(message = "{dto.captcha.invalid}")
+    @JsonProperty("g-recaptcha-response")
+    private String gRecaptchaResponse;
 }

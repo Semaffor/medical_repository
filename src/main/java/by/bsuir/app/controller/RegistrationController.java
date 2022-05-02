@@ -1,8 +1,6 @@
 package by.bsuir.app.controller;
 
 import by.bsuir.app.dto.UserRegistrationDto;
-import by.bsuir.app.entity.User;
-import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.CaptchaService;
 import by.bsuir.app.service.UserService;
@@ -49,11 +47,17 @@ public class RegistrationController {
     @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegistrationDto user, HttpServletRequest request) {
 
-//        captchaService.verifyCaptcha(request.getParameter("g-recaptcha-response"));
+        captchaService.verifyCaptcha(user.getGRecaptchaResponse());
         userService.registerNewUserAccount(user, passwordEncoder);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ResponseBody
+    @PostMapping("/reset/password")
+    private ResponseEntity<Map<String, String>> passwordRecovery(String email) {
+
+
+    }
     @GetMapping("/activation/{code}")
     public String activateUser(Model model, @PathVariable String code) {
         boolean isUserActivated = userService.activateUser(code);

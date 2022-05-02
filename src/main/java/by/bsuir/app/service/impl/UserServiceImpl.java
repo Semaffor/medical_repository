@@ -159,7 +159,11 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setMonitored(true);
+
+            EmailValidationCode codeEntity = user.getActivationCode();
             user.setActivationCode(null);
+            codeEntity.setUser(null);
+            emailValidationCodeDao.update(codeEntity);
             dao.update(user);
 
             return true;
