@@ -3,11 +3,15 @@ package by.bsuir.app.dto;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCard;
 import by.bsuir.app.entity.enums.Gender;
+import by.bsuir.app.entity.enums.Role;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 @Data
 public class CardDto {
@@ -49,7 +53,9 @@ public class CardDto {
     @NotNull(message = "{dto.card.sex.empty}")
     private Gender gender;
 
-    public static CardDto fromUser(User user) {
+    private String role;
+
+    public static CardDto fromUser(User user, String lang) {
         CardDto cardDto = new CardDto();
 
         cardDto.setId(user.getId());
@@ -63,7 +69,18 @@ public class CardDto {
             cardDto.setMobile(card.getMobile());
             cardDto.setBirthday(card.getBirthday());
             cardDto.setGender(card.getGender());
+            Role firstRole = getFirstRole(user.getRoles());
+            if (lang.equals("ru")) {
+                cardDto.setRole(firstRole.getRu());
+            } else {
+                cardDto.setRole(firstRole.getRu());
+            }
         }
        return cardDto;
+    }
+
+    private static Role getFirstRole(Set<Role> roles) {
+        ArrayList<Role> roleArrayList = new ArrayList<>(roles);
+        return roleArrayList.get(0);
     }
 }

@@ -23,8 +23,8 @@ function getHtmlValByName(elemName) {
     return $('[name=' + elemName + ']').val();
 }
 
-function showAndHideAfterTime(elem, time, velocity = 'slow') {
-    $(elem).show("linear")
+function showAndHideAfterTime(elem, time = 2000, velocity = 'slow') {
+    $(elem).show(velocity)
     hideElementAfterTime(elem, time, velocity);
 }
 

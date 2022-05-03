@@ -29,8 +29,8 @@
                                 <div class="col-sm-9 text-secondary">
                                     <input type="text" class="form-control" th:field="*{name}"
                                            th:value="*{name}" min="3" max="28">
-<!--                                    <p class="text_error_underline" th:each="error: ${#fields.errors('name')}"-->
-<!--                                       th:text="${error}"></p>-->
+                                    <!--                                    <p class="text_error_underline" th:each="error: ${#fields.errors('name')}"-->
+                                    <!--                                       th:text="${error}"></p>-->
                                     <p class="text_error_underline name_error error" th:text="#{reg.error}"></p>
 
                                 </div>
@@ -40,7 +40,7 @@
                                 <div class="col-sm-9 text-secondary">
                                     <input type="text" class="form-control" th:field="*{surname}"
                                            th:value="*{surname}" min="3" max="28">
-<!--                                    <p class="text_error_underline" th:if="${#fields.errors('surname')}"-->
+                                    <!--                                    <p class="text_error_underline" th:if="${#fields.errors('surname')}"-->
                                     <p class="text_error_underline surname_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="col-sm-9 text-secondary">
                                     <input type="text" class="form-control" th:field="*{thirdName}"
                                            th:value="*{thirdName}" min="3" max="28">
-<!--                                    <p class="text_error_underline" th:if="${#fields.errors('thirdName')}"-->
+                                    <!--                                    <p class="text_error_underline" th:if="${#fields.errors('thirdName')}"-->
                                     <p class="text_error_underline thirdName_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
@@ -59,8 +59,8 @@
                                 <div class="col-sm-9 text-secondary">
                                     <input type="email" class="form-control" th:field="*{email}"
                                            th:value="*{email}">
-<!--                                    <p id="email" class="text_error_underline" th:if="${#fields.errors('email')}"-->
-<!--                                       th:errors="*{email}"></p>-->
+                                    <!--                                    <p id="email" class="text_error_underline" th:if="${#fields.errors('email')}"-->
+                                    <!--                                       th:errors="*{email}"></p>-->
                                     <p class="text_error_underline email_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
@@ -69,11 +69,11 @@
                                 <div class="col-sm-9 text-secondary  ">
                                     <div class="mobile_block">
                                         <h6 class="mb-0 me-2">+375</h6>
-                                        <input type="number" class="form-control" th:field="*{mobile}"
-                                           th:value="*{mobile}" min="100000000" max="999999999" placeholder="">
+                                        <input type="text" class="form-control" th:field="*{mobile}"
+                                               th:value="*{mobile}" >
                                     </div>
-                                        <!--                                    <p class="text_error_underline" th:if="${#fields.errors('mobile')}"-->
-<!--                                       th:errors="*{mobile}"></p>-->
+                                    <!--                                    <p class="text_error_underline" th:if="${#fields.errors('mobile')}"-->
+                                    <!--                                       th:errors="*{mobile}"></p>-->
                                     <p class="text_error_underline mobile_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
@@ -82,8 +82,8 @@
                                 <div class="col-sm-9 text-secondary">
                                     <input type="date" class="form-control" th:field="*{birthday}"
                                            th:value="*{birthday}">
-<!--                                    <p class="text_error_underline" th:if="${#fields.errors('birthday')}"-->
-<!--                                       th:errors="*{birthday}"></p>-->
+                                    <!--                                    <p class="text_error_underline" th:if="${#fields.errors('birthday')}"-->
+                                    <!--                                       th:errors="*{birthday}"></p>-->
                                     <p class="text_error_underline birthday_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
@@ -102,12 +102,29 @@
                                         <label class="custom-control-label" for="option2"
                                                th:text="#{profile.gender.female}"></label>
                                     </div>
-<!--                                    <p class="text_error_underline" th:if="${#fields.errors('gender')}"-->
-<!--                                       th:errors="*{gender}"></p>-->
+                                    <!--                                    <p class="text_error_underline" th:if="${#fields.errors('gender')}"-->
+                                    <!--                                       th:errors="*{gender}"></p>-->
                                     <p class="ms-4 text_error_underline gender_error error" th:text="#{reg.error}"></p>
                                 </div>
                             </div>
-                            <div class="success alert alert-primary text-center" th:text="#{label.changes.success}"></div>
+
+                            <div sec:authorize="hasAuthority('ADMIN')" th:remove="tag">
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-sm-3"><h6 class="mb-0" th:text="#{profile.role}">birthday</h6></div>
+                                    <div class="col-sm-9 text-secondary d-flex">
+                                        <select class="form-select w-auto me-2" aria-label="Default select example" th:field="*{role}">
+                                            <option disabled selected th:value="*{role}" th:text="*{role}"></option>
+                                            <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
+                                        </select>
+                                        <button id="submit_edit_role" class="btn btn-primary px-4"
+                                                th:text="#{label.change}"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="failRole" class="fail alert alert-warning text-center"
+                                 th:text="#{label.changes.submitted.fail}"></div>
+                            <div class="success alert alert-primary text-center"
+                                 th:text="#{label.changes.success}"></div>
                             <div class="fail alert alert-warning text-center" th:text="#{label.changes.fail}"></div>
                             <div class="row">
                                 <div class="col-sm-12 text-secondary text-center">
@@ -127,5 +144,6 @@
 <script th:src="@{/static/js/libs/jquery-3.6.0.min.js}"></script>
 <script th:src="@{/static/js/personal-edit.js}"></script>
 <script th:src="@{/static/js/general-form-ajax.js}"></script>
+<script th:src="@{/static/js/common.js}"></script>
 </body>
 </html>

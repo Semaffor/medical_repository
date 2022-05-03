@@ -15,6 +15,7 @@ import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.AbstractService;
 import by.bsuir.app.service.UserService;
+import by.bsuir.app.util.RoleHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -195,6 +196,27 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
                 User user = userOptional.get();
                 user.setPassword(passwordEncoder.encode(password));
                 userDao.update(user);
+                return true;
+            }
+            return false;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean changeRole(String username, String roleString) {
+        try {
+            Optional<User> userOptional = userDao.findByUsername(username);
+            if (userOptional.isPresent()) {
+                RoleHandler roleHandler = new RoleHandler();
+                System.out.println(roleString);
+                Role role = roleHandler.getRoleFromLocalizedValue(roleString);
+
+                User user = userOptional.get();
+                user.setRoles(Set.of(role));
+                userDao.update(user);
+
                 return true;
             }
             return false;

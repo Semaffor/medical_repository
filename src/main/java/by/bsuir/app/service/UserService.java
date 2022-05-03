@@ -33,4 +33,7 @@ public interface UserService extends Service<User> {
     void sendRecoveryLink(String email);
 
     boolean changePassword(Long id, String password, PasswordEncoder pe);
+
+    boolean changeRole(String username, String role);
+
 }
