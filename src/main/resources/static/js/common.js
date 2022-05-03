@@ -1,3 +1,5 @@
+const serverURL = "http://localhost:8080/";
+
 function hideLabel(label, speed) {
     $(String(label)).hide(String(speed));
 }
@@ -19,4 +21,13 @@ function textAlert(name, message, time) {
 
 function getHtmlValByName(elemName) {
     return $('[name=' + elemName + ']').val();
+}
+
+function showAndHideAfterTime(elem, time, velocity = 'slow') {
+    $(elem).show("linear")
+    hideElementAfterTime(elem, time, velocity);
+}
+
+function getCsrfTokenFromCookie() {
+    return document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 }

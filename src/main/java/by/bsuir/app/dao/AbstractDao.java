@@ -76,8 +76,8 @@ public abstract class AbstractDao<T extends Serializable> implements Dao<T> {
         try {
             Session session = getCurrentSession();
             CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaQuery<User> cr = cb.createQuery(User.class);
-            Root<User> user = cr.from(User.class);
+            CriteriaQuery<T> cr = cb.createQuery(localClass);
+            Root<T> user = cr.from(localClass);
             cr.select(user).where(cb.equal(user.get(fieldName),param));
 
             Query query = session.createQuery(cr);

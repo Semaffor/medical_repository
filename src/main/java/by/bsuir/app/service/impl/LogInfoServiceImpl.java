@@ -24,9 +24,15 @@ public class LogInfoServiceImpl extends AbstractService<LogInfo> implements LogI
 
     @Override
     @Transactional
+    public void save(LogInfo logInfo) {
+        logInfoDao.save(logInfo);
+    }
+
+    @Override
+    @Transactional
     public void addLogRecord(User user) {
         LogInfo log = new LogInfo(new Date());
-        user.addLogInfo(log);
+//        user.addLogInfo(log);
     }
 
     @Override

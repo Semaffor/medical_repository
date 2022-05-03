@@ -1,11 +1,11 @@
 $(document).ready(() => {
-    const editPersonLink = "http://localhost:8080/user/personal/edit/"
+    const editPersonLink = "/user/personal/edit/"
         let number = 1;
     $('#example').DataTable({
         "processing": true,
         // "serverSide": true,
         "ajax": {
-            "url": "http://localhost:8080/admin/management/all",
+            "url": "/admin/management/all",
             'dataSrc': '',
         },
 

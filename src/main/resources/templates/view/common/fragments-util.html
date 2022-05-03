@@ -7,6 +7,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" th:href="@{/static/images/logo.png}" type="image/x-icon">
+
 </th:block>
 
 <th:block th:fragment="bs-link-css">
@@ -30,7 +32,6 @@
 <th:block th:fragment="head">
     <th:block th:include=":: meta-tags"/>
     <th:block th:include=":: bs-link-css"/>
-    <link th:href="@{/static/images/logo.png}" rel="shortcut icon" type="image/x-icon">
 </th:block>
 
 <th:block th:fragment="jQuery-lib">

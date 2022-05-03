@@ -59,16 +59,6 @@ public class User extends BaseEntity {
     @JoinColumn(name = "user_card_id", referencedColumnName = "id")
     private UserCard card = new UserCard();
 
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.REFRESH)
-    Set<LogInfo> logInfos = new HashSet<>();
-
-    public void addLogInfo(LogInfo logInfo) {
-        logInfos.add(logInfo);
-        logInfo.setUser(this);
-    }
-
     @OneToOne(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,

@@ -13,18 +13,21 @@ $(document).ready(function () {
                 textAlert("#captchaError", "Please verify that you are not a robot.", 2000);
                 return false;
             }
-
+            hideLabel('#captcha', "normal");
+            hideLabel('#reg_button', 'normal');
+            $('#sending').show('slow');
             let formData = getDataFromFormById('form');
-            console.log(JSON.stringify(formData));
-            fetch('http://localhost:8080/auth/registration', {
+            let csrfToken = getCsrfTokenFromCookie();
+            fetch('/auth/registration', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json','X-XSRF-TOKEN': csrfToken},
                 body: JSON.stringify(formData),
             })
                 .then(response => {
                     if (response.status === 200) {
                         hideLabel('#captcha', "normal");
                         hideLabel('#reg_button', 'normal');
+                        $('#sending').hide('slow');
                         $('#successRegistrationLabel').show('slow');
                     }
                     return response.json();
@@ -45,10 +48,6 @@ $(document).ready(function () {
             return false;
         }
         return true;
-    }
-
-    function checkCaptcha(name) {
-
     }
 
 });

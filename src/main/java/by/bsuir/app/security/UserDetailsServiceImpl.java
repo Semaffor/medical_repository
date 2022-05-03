@@ -1,6 +1,8 @@
 package by.bsuir.app.security;
 
+import by.bsuir.app.entity.LogInfo;
 import by.bsuir.app.entity.User;
+import by.bsuir.app.exception.UserStatusException;
 import by.bsuir.app.service.LogInfoService;
 import by.bsuir.app.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -27,8 +30,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Optional<User> optionalUser = userService.findByUsername(username);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
-                logInfoService.addLogRecord(user);
-                userService.update(user);
+
+                if (!user.isMonitored()) {
+                    throw new UsernameNotFoundException("User hasn't activate account.");
+                }
+                if (user.isBlocked()) {
+                    throw new UserStatusException("User is blocked.");
+                }
+                LogInfo logInfo = new LogInfo(new Date());
+                logInfo.setUser(user);
+                logInfoService.save(logInfo);
+//                userService.update(user);
                 return SecurityUser.fromUser(user);
             }
             throw new UsernameNotFoundException("User doesn't exits.");

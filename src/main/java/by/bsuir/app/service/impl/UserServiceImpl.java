@@ -10,6 +10,7 @@ import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCard;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.DaoException;
+import by.bsuir.app.exception.EmailNotFoundException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.AbstractService;
@@ -46,7 +47,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    @Transactional
     public CardDto update(CardDto cardDto) throws ServiceException {
         try {
             Optional<User> optionalUser = userDao.findById(cardDto.getId());
@@ -85,7 +85,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public void changeBlockStatusByUsername(String username) throws ServiceException {
         try {
             Optional<User> optionalUser = userDao.findByUsername(username);
-            if (optionalUser.isPresent()){
+            if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 user.setBlocked(!user.isBlocked());
                 userDao.update(user);
@@ -96,7 +96,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    @Transactional
     public Optional<User> findByUsername(String username) throws ServiceException {
         try {
             return userDao.findByUsername(username);
@@ -106,7 +105,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    @Transactional
     public Optional<User> findByEmail(String email) throws ServiceException {
         try {
             return userDao.findByEmail(email);
@@ -116,7 +114,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    @Transactional
     public User registerNewUserAccount(UserRegistrationDto userRegistrationDto, PasswordEncoder passwordEncoder) throws
             UserAlreadyExistsException, ServiceException {
 
@@ -141,6 +138,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         user.setActivationCode(code);
 
         user.setId(userDao.save(user));
+        user.setActivationCode(code);
         code.setUser(user);
         emailValidationCodeDao.save(code);
 
@@ -153,7 +151,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    @Transactional
     public boolean activateUser(String code) {
         Optional<User> userOptional = userDao.findByActivationCode(code);
         if (userOptional.isPresent()) {
@@ -169,5 +166,40 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             return true;
         }
         return false;
+    }
+
+    @Override
+    @Transactional
+    public void sendRecoveryLink(String email) {
+        Optional<User> optionalUser = findByEmail(email);
+        if (optionalUser.isPresent()) {
+            String uuidCode = UUID.randomUUID().toString();
+            EmailValidationCode emailCode = new EmailValidationCode(uuidCode);
+            User user = optionalUser.get();
+
+            emailCode.setUser(user);
+            emailValidationCodeDao.save(emailCode);
+            String message = String.format("To reset your password, please follow the link: %s",
+                    serverUrl + "auth/reset/password/" + uuidCode);
+            mailSender.send(email, "Password recovery", message);
+        } else {
+            throw new EmailNotFoundException("Email hasn't found: " + email);
+        }
+    }
+
+    @Override
+    public boolean changePassword(Long id, String password, PasswordEncoder passwordEncoder) {
+        try {
+            Optional<User> userOptional = userDao.findById(id);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                user.setPassword(passwordEncoder.encode(password));
+                userDao.update(user);
+                return true;
+            }
+            return false;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

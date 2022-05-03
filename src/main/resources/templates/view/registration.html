@@ -14,7 +14,7 @@
             <div class="title" th:text="#{reg.registration}"></div>
             <div class="input-box underline">
                 <input type="text" th:placeholder="#{login.username}" th:field="*{username}"
-                       name="username" autocomplete="off" autofocus required>
+                       name="username" autocomplete="off" autofocus >
                 <div class="underline"></div>
                 <p class="text_error_underline" th:each="error: ${#fields.errors('username')}" th:text="#{}">Validation
                     error</p>
@@ -24,20 +24,20 @@
             </div>
             <div class="input-box">
                 <input type="email" th:placeholder="#{reg.email}" th:field="*{email}" name="email"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                       autocomplete="off" minlength="3" maxlength="28" >
                 <div class="underline"></div>
                 <p class="text_error_underline" th:each="error: ${#fields.errors('email')}" th:text="${error}"></p>
                 <p id="email_error_text" class="text_error_underline"/>
             </div>
             <div class="input-box">
                 <input type="password" th:placeholder="#{login.password}" th:field="*{password}" name="password"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                       autocomplete="off" minlength="3" maxlength="28" >
                 <div class="underline"></div>
                 <p id="password_error_text" class="text_error_underline"/>
             </div>
             <div class="input-box">
                 <input type="password" th:placeholder="#{reg.password.repeat}" th:field="*{matchingPassword}"
-                       autocomplete="off" minlength="3" maxlength="28" required>
+                       autocomplete="off" minlength="3" maxlength="28" >
                 <div class="underline"></div>
                 <p class="text_error_underline" th:each="error: ${#fields.errors('matchingPassword')}"/>
                 <p id="repeat_pass_error_text" class="text_error_underline"/>
@@ -58,8 +58,10 @@
             <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>
             <div class="input-box button mt-4">
                 <input type="submit" id="reg_button" th:value="#{reg.signUp}">
+                <div id="sending" class="text-center alert-info disable"
+                     th:text="#{mail.sending}"></div>
                 <div id="successRegistrationLabel" class="text-center alert-info disable"
-                     th:text="#{reg.success}"></div>
+                     th:text="#{mail.success}"></div>
             </div>
         </form>
         <div class="title forgot">
