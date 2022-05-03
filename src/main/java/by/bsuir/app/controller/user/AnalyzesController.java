@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -81,4 +82,15 @@ public class AnalyzesController {
         return generalBloodTestService.getPage(pageNumber, size, username, lang);
     }
 
+    @ResponseBody
+    @GetMapping("/bioBlood")
+    public List<BiochemicalBloodTest> findAllBiochemicalBlood() {
+        return biochemicalBloodTestService.findAll();
+    }
+
+    @ResponseBody
+    @GetMapping("/generalBlood")
+    public List<GeneralBloodTest> findAllGeneralBlood() {
+        return generalBloodTestService.findAll();
+    }
 }

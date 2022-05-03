@@ -22,7 +22,7 @@
                     <th class="text-center" scope="col" th:text="#{profile.fullName}">First</th>
                     <th class="text-center" scope="col" th:text="#{profile.gender}">First</th>
                     <th class="text-center" scope="col" th:text="#{profile.role}">First</th>
-                    <th class="text-center" scope="col" th:text="#{management.status.block}">First</th>
+<!--                    <th class="text-center" scope="col" th:text="#{management.status.block}">First</th>-->
                     <th class="text-center" scope="col" th:text="#{management.action}">First</th>
                 </tr>
                 </thead>
@@ -47,24 +47,20 @@
                             <span th:case="'USER'" th:text="#{profile.role.user}"></span>
                             <span th:case="'DOCTOR'" th:text="#{profile.role.doctor}"></span>
                         </td>
-                        <td class="text-center" th:switch="${user.roles[0].toString()}">
-                            <th:block th:unless="${user.isBlocked}"><img class="w-24"
-                                                                         th:src="@{/static/images/active.png}">
-                            </th:block>
-                            <th:block th:if="${user.isBlocked}"><img class="w-24"
-                                                                     th:src="@{/static/images/disabled.png}"></th:block>
-                        </td>
+<!--                        <td class="text-center" th:switch="${user.roles[0].toString()}">-->
+<!--                            <th:block th:unless="${user.isBlocked}"><img class="w-24"-->
+<!--                                                                         th:src="@{/static/images/active.png}">-->
+<!--                            </th:block>-->
+<!--                            <th:block th:if="${user.isBlocked}"><img class="w-24"-->
+<!--                                                                     th:src="@{/static/images/disabled.png}"></th:block>-->
+<!--                        </td>-->
                         <td class="text-center flex-fill flex-row block_actions">
-
-                            <form th:action="@{/admin/management/blocking/{username}(username=${user.username})}"
-                                  method="post">
+<!--                            th:action="@{/admin/management/blocking/{username}(username=${user.username})}" method="post"-->
+                            <form class="blocking_button">
+                                <input type="hidden" th:value="*{user.username}">
                                 <button>
-                                    <th:block th:if="${user.isBlocked}"><img class="w-24 me-3"
-                                                                             th:src="@{/static/images/active.png}">
-                                    </th:block>
-                                    <th:block th:unless="${user.isBlocked}"><img class="w-24 me-3"
-                                                                                 th:src="@{/static/images/disabled.png}">
-                                    </th:block>
+                                    <th:block th:if="${user.isBlocked}"><img class="w-24 me-3" th:src="@{/static/images/active.png}"></th:block>
+                                    <th:block th:unless="${user.isBlocked}"><img class="w-24 me-3" th:src="@{/static/images/disabled.png}"></th:block>
                                 </button>
                             </form>
                             <form th:action="@{/user/personal/edit/{username}(username=${user.username})}">
@@ -76,26 +72,10 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
 
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <table id="example" class="table table-striped table-hover" style="width: 100%">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th scope="col">#</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{login.username}">First</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{profile.fullName}">First</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{profile.gender}">First</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{profile.role}">First</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{management.status.block}">First</th>-->
-<!--                <th class="text-center" scope="col" th:text="#{management.action}">First</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
+    </div>
+
+</div>
 
 <div th:replace="/common/fragments-page :: footer"/>
 <th:block th:include="/common/fragments-util :: bs-link-js"/>
