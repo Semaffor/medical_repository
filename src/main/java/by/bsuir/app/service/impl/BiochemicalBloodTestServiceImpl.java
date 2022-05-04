@@ -24,7 +24,8 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class BiochemicalBloodTestServiceImpl extends AbstractService<BiochemicalBloodTest> implements BiochemicalBloodTestService {
+public class BiochemicalBloodTestServiceImpl extends AbstractService<BiochemicalBloodTest>
+        implements BiochemicalBloodTestService {
 
     private final UserDao userDao;
     private final BiochemicalBloodTestDao bloodTestDao;
@@ -63,5 +64,26 @@ public class BiochemicalBloodTestServiceImpl extends AbstractService<Biochemical
         IndicatorHandler<BiochemicalBloodTest> ih = new BiochemicalBloodIndicatorHandler(lang);
         ih.processIndicators(postPage.getObject());
         return new Paged<>(postPage, Paging.of(bloodTestDao.findAllCountByUsername(username), pageNumber, size));
+    }
+
+    @Override
+    @Transactional
+    public boolean addRecommendation(Long userId, Long bloodTestId, String recommendation) {
+        try {
+            Optional<BiochemicalBloodTest> bloodTestOptional = bloodTestDao.findById(bloodTestId);
+            Optional<User> userOptional = userDao.findById(userId);
+
+            if (bloodTestOptional.isPresent()) {
+                BiochemicalBloodTest test = bloodTestOptional.get();
+                test.setResult(recommendation);
+                userOptional.ifPresent(test::setUser);
+                bloodTestDao.save(test);
+                return true;
+
+            }
+            return false;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

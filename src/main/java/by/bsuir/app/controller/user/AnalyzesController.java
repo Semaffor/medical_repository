@@ -81,16 +81,4 @@ public class AnalyzesController {
             @RequestParam(value = "size", required = false, defaultValue = "1") int size) {
         return generalBloodTestService.getPage(pageNumber, size, username, lang);
     }
-
-    @ResponseBody
-    @GetMapping("/bioBlood")
-    public List<BiochemicalBloodTest> findAllBiochemicalBlood() {
-        return biochemicalBloodTestService.findAll();
-    }
-
-    @ResponseBody
-    @GetMapping("/generalBlood")
-    public List<GeneralBloodTest> findAllGeneralBlood() {
-        return generalBloodTestService.findAll();
-    }
 }

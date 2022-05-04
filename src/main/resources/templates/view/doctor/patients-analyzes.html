@@ -12,13 +12,15 @@
 </head>
 <body>
 <div th:replace="/common/fragments-page :: header"/>
+
+<input id="userId" type="hidden" th:value="${#authentication.getPrincipal().getUsername()}">
 <div class="main head-block">
     <div class="container ">
         <div class="container ">
-            <div class="row">
-                <div class="col-xl-4 col-12"></div>
-                <div class="col-xl-4 col-12"><h2 th:text="#{analyzes.blood.biochemical.title}"></h2></div>
-                <div class="col-xl-4 col-12"></div>
+            <div class="row text-center">
+                <div class="col-xl-3 col-12"></div>
+                <div class="col-xl-6 col-12"><h2 th:text="#{analyzes.blood.biochemical.title}"></h2></div>
+                <div class="col-xl-3 col-12"></div>
             </div>
         </div>
     </div>
@@ -45,39 +47,39 @@
         </div>
     </div>
 </div>
-<div class="main head-block">
-    <div class="container ">
-        <div class="container ">
-            <div class="row">
-                <div class="col-xl-4 col-12"></div>
-                <div class="col-xl-4 col-12"><h2 th:text="#{analyzes.blood.general.title}"></h2></div>
-                <div class="col-xl-4 col-12"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="main head-block">-->
+<!--    <div class="container ">-->
+<!--        <div class="container ">-->
+<!--            <div class="row">-->
+<!--                <div class="col-xl-4 col-12"></div>-->
+<!--                <div class="col-xl-4 col-12"><h2 th:text="#{analyzes.blood.general.title}"></h2></div>-->
+<!--                <div class="col-xl-4 col-12"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="main center-block">
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <table id="general_blood_table" class="table table-striped table-hover" style="width: 100%">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th class="text-center" scope="col" th:text="#{login.username}">First</th>
-                        <th class="text-center" scope="col" th:text="#{profile.fullName}">First</th>
-                        <th class="text-center" scope="col" th:text="#{profile.gender}">First</th>
-                        <th class="text-center" scope="col" th:text="#{profile.role}">First</th>
-                        <th class="text-center" scope="col" th:text="#{management.status.block}">First</th>
-                        <th class="text-center" scope="col" th:text="#{management.action}">First</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="main center-block">-->
+<!--    <div class="container">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <table id="general_blood_table" class="table table-striped table-hover" style="width: 100%">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th scope="col">#</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{login.username}">First</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{profile.fullName}">First</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{profile.gender}">First</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{profile.role}">First</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{management.status.block}">First</th>-->
+<!--                        <th class="text-center" scope="col" th:text="#{management.action}">First</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- Modal -->
 <div class="modal fade " id="addRecommendation">
@@ -90,16 +92,15 @@
                     </button>
                 </div>
                 <form>
-                    <div id='formRecovery' class="form-group">
-                        <label for="email" class="mb-2" th:text="#{recover.password.for}"></label>
-                        <input type="email" class="form-control text-center" name="email" id="email" aria-describedby="emailHelpId"
-                               placeholder="some@some.by" required>
-                        <small id="emailHelpId" class="form-text disable red" th:text="#{dto.card.email.pattern}"></small>
-                        <small id="emailHelpFail" class="form-text disable red" th:text="#{recover.email.not-found}"></small>
+                    <div id='formRecommendation' class="form-group">
+                        <label for="recom" class="mb-2" th:text="#{analyzes.blood.recommendations}"></label>
+                        <textarea class="form-control" id="recom" rows="3"></textarea>
                     </div>
-                    <div id="sending" class="text-center alert-info disable mt-2" th:text="#{mail.sending}"></div>
-                    <div id="successSendEmailForRecoveryLabel" class="text-center alert-info disable mt-2" th:text="#{mail.success}"></div>
-                    <button id="recoverPassword" type="submit" class="btn btn-primary mt-3" th:text="#{recover.password}"></button>
+                    <div id="success" class="text-center alert-info disable mt-2" th:text="#{message.changes.added.success}"></div>
+                    <div id="invalidMin" class="text-center alert-warning disable mt-2" th:text="#{label.invalid.min}"></div>
+                    <div id="invalidMax" class="text-center alert-warning disable mt-2" th:text="#{label.invalid.max}"></div>
+                    <div id="fail" class="text-center alert-warning disable mt-2" th:text="#{message.changes.added.fail}"></div>
+                    <button id="send" type="submit" class="btn btn-primary mt-3" th:text="#{label.changes.save.title}"></button>
                 </form>
             </div>
         </div>

@@ -10,4 +10,6 @@ public interface BiochemicalBloodTestService extends Service<BiochemicalBloodTes
     BiochemicalBloodTest save(BiochemicalBloodTestDto test) throws ServiceException;
 
     Paged<BiochemicalBloodTest> getPage(int pageNumber, int size, String username, String lang);
+
+    boolean addRecommendation(Long userId, Long bloodTestId, String recommendation);
 }
