@@ -77,7 +77,7 @@ public class BiochemicalBloodTestServiceImpl extends AbstractService<Biochemical
                 BiochemicalBloodTest test = bloodTestOptional.get();
                 test.setResult(recommendation);
                 userOptional.ifPresent(test::setUser);
-                bloodTestDao.save(test);
+                bloodTestDao.update(test);
                 return true;
 
             }

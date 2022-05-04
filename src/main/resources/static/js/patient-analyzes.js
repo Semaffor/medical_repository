@@ -29,7 +29,7 @@ $(document).ready(() => {
                     data: null,
                     width: "35%",
                     render: (data, type, row) => {
-                        if (data.result === null) {
+                        if (data.result === null || data.result.length === 0) {
                             return '<div class="modalOpen" data-bs-toggle="modal" data-bs-target="#addRecommendation">' +
                                 '<img data-id="' + data.id + '" class="w-24 me-3 img_link bio" src="/static/images/edit.png"' +
                                 '  alt="setRecommendation"></div>';
