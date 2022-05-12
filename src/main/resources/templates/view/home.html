@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!--    <th:block th:include="/common/fragments-util :: doctype-html-head-tags-begin"/>-->
+    <th:block th:include="/common/fragments-util :: head"/>
+    <link th:href="@{/static/css/home.css}" rel="stylesheet"/>
+    <title th:text="#{navbar.brand}"></title>
+</head>
+<body>
+<div th:replace="/common/fragments-page :: header"/>
+<div class="main head-block">
+    <div class="container">
+        <div class="row">
+            <div sec:authorize="isAnonymous()">
+                <h1 th:inline="text" th:text="#{main.welcome}"></h1>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <h1 th:inline="text">
+                    <span th:text="#{main.welcome.back}"/>
+                    [[${#httpServletRequest.remoteUser}]]!
+                </h1>
+            </div>
+
+            <div class="col head-name">
+                <h1 class="head-name-top">
+                    <span th:text="#{main.info.first}"/></br>
+                    <span th:text="#{main.info.second}"/>
+                </h1>
+                <div class="head-name-bottom" th:text="#{main.info.third}"></div>
+                <div class="head-title text-uppercase mb-4" th:text="#{navbar.brand}"></div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a class="btn-itd btn-reg" th:href="@{/auth/registration}" th:text="#{main.registration}"></a>
+                </div>
+            </div>
+            <div class="col head-img">
+                <img th:src="@{/static/images/head-img.png}" alt="Doctor" class="head-img">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main about">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center text-uppercase mb-5 color-blue" th:text="#{about.opportunities}"></h1>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-md-6 col-sm-12 text-center">
+                <div class="row-block-item">
+                    <img th:src="@{/static/images/global-logo.png}"/>
+                    <h5 class="p-2" th:text="#{about.personal}"></h5>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12 text-center">
+                <div class="row-block-item">
+                    <img th:src="@{/static/images/history-logo.png}"/>
+                    <h5 class="p-2" th:text="#{about.patients.history}"></h5>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12 text-center">
+                <div class="row-block-item">
+                    <img th:src="@{/static/images/email-logo.png}"/>
+                    <h5 class="p-2" th:text="#{about.patients.email-notifications}"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main center-block">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center text-uppercase mb-5 color-blue" th:text="#{center.for-who}"></h1>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Lorem ipsum dolor sit amet.</h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Lorem ipsum dolor sit amet.</h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Lorem ipsum dolor sit amet.</h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">Lorem ipsum dolor sit amet.</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="#header" class="btn-itd btn-reg text-uppercase" th:text="#{center.start-use}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/fragments-page :: footer"/>
+<th:block th:include="/common/fragments-util :: bs-link-js"/>
+</body>
+</html>
