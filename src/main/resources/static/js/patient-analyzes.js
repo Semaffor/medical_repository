@@ -51,14 +51,14 @@ $(document).ready(() => {
     $("#send").on("click", e => {
         e.preventDefault();
         let recom = $("#recom").val();
-        let userId = $("#userId").val();
+        let username = $("#username").val();
 
         if (isRecomValid(recom)) {
             console.log(bloodTestId);
 
             let map = new Map();
         map.set("recom", recom);
-        map.set("userId", userId);
+        map.set("username", username);
         map.set("bloodTestId", bloodTestId);
 
         let json = Object.fromEntries(map);

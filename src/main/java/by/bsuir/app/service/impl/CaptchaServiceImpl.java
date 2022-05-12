@@ -38,7 +38,6 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Override
     public void verifyCaptcha(String gRecaptchaResponse) {
         if (!responseSanityCheck(gRecaptchaResponse)) {
-            System.out.println(gRecaptchaResponse);
             throw new InvalidReCaptchaException("Response contains invalid characters");
         }
 
@@ -54,8 +53,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         GoogleResponse response = restTemplate
                 .postForObject(captchaUrl, request, GoogleResponse.class);
 
-        System.out.println(response);
-        if (!response.isSuccess()) {
+        if (response == null || !response.isSuccess()) {
             throw new InvalidReCaptchaException("reCaptcha was not successfully validated");
         }
     }

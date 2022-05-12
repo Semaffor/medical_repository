@@ -68,10 +68,10 @@ public class BiochemicalBloodTestServiceImpl extends AbstractService<Biochemical
 
     @Override
     @Transactional
-    public boolean addRecommendation(Long userId, Long bloodTestId, String recommendation) {
+    public boolean addRecommendation(String username, Long bloodTestId, String recommendation) {
         try {
             Optional<BiochemicalBloodTest> bloodTestOptional = bloodTestDao.findById(bloodTestId);
-            Optional<User> userOptional = userDao.findById(userId);
+            Optional<User> userOptional = userDao.findByUsername(username);
 
             if (bloodTestOptional.isPresent()) {
                 BiochemicalBloodTest test = bloodTestOptional.get();

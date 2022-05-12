@@ -16,12 +16,9 @@
 
 <div class="head-block text-center">
     <div class="head element">
-        <h2>Lorem ipsum dolor.</h2>
+        <h2 th:text="#{page.title.analyzes.title}">Lorem ipsum dolor.</h2>
     </div>
-    <div class="center element">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda cupiditate dolore dolorem ea quod
-        reprehenderit saepe? Earum quis recusandae reprehenderit.
-    </div>
+    <div class="center element" th:text="#{page.title.analyzes.definition}"></div>
 </div>
 
 <div class="main">
@@ -31,11 +28,8 @@
             <div class="col-xl-10 col-12">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#biochemical_blood_modal">
                     <div class="analise_card biochemical_blood">
-                        <img class="image"
-                             src="https://external-preview.redd.it/VWrM2IrTB26KZm3b_bQL0ZLeZWfhWfgx1Mj5iOSgPe0.png?auto=webp&s=16aedaad09afab1a43abf2d3314517a4917f14a5"/>
-                        <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dignissimos
-                            dolore non tempore. Eligendi, nam, repellat! Eius tempore tenetur ullam!
-                        </div>
+                        <img class="image" th:src="@{/static/images/bio.jpg}"/>
+                        <div class="text" th:text="#{page.title.analyzes.blood.bio}"></div>
                     </div>
                 </button>
 
@@ -47,11 +41,9 @@
             <div class="col-xl-10 col-12">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#general_blood_modal">
                     <div class="analise_card general_blood">
-                        <img class="image"
-                             src="https://external-preview.redd.it/VWrM2IrTB26KZm3b_bQL0ZLeZWfhWfgx1Mj5iOSgPe0.png?auto=webp&s=16aedaad09afab1a43abf2d3314517a4917f14a5"/>
-                        <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dignissimos
-                            dolore non tempore. Eligendi, nam, repellat! Eius tempore tenetur ullam!
-                        </div>
+                        <img class="image" th:src="@{/static/images/general.jpg}"/>
+<!--                             src="https://external-preview.redd.it/VWrM2IrTB26KZm3b_bQL0ZLeZWfhWfgx1Mj5iOSgPe0.png?auto=webp&s=16aedaad09afab1a43abf2d3314517a4917f14a5"/>-->
+                        <div class="text" th:text="#{page.title.analyzes.blood.general}"></div>
                     </div>
                 </button>
             </div>

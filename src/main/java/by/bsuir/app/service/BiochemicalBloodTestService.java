@@ -11,5 +11,5 @@ public interface BiochemicalBloodTestService extends Service<BiochemicalBloodTes
 
     Paged<BiochemicalBloodTest> getPage(int pageNumber, int size, String username, String lang);
 
-    boolean addRecommendation(Long userId, Long bloodTestId, String recommendation);
+    boolean addRecommendation(String username, Long bloodTestId, String recommendation);
 }

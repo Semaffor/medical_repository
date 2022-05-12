@@ -32,7 +32,6 @@ public class LogInfoServiceImpl extends AbstractService<LogInfo> implements LogI
     @Transactional
     public void addLogRecord(User user) {
         LogInfo log = new LogInfo(new Date());
-//        user.addLogInfo(log);
     }
 
     @Override

@@ -102,7 +102,7 @@ public class RegistrationController {
         if (isUserActivated) {
             model.addAttribute("activated", getInternationalizationMessage("user.activation.success"));
         } else {
-            model.addAttribute("failCode", getInternationalizationMessage("user.activation.fail"));
+            model.addAttribute("recovery", getInternationalizationMessage("user.activation.fail"));
         }
 
         return "login";

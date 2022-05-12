@@ -4,6 +4,7 @@ import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCard;
 import by.bsuir.app.entity.enums.Gender;
 import by.bsuir.app.entity.enums.Role;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +15,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 @Data
+@Builder
+
 public class CardDto {
 
     private final static int MIN_STRING_LENGTH = 3;
@@ -56,7 +59,7 @@ public class CardDto {
     private String role;
 
     public static CardDto fromUser(User user, String lang) {
-        CardDto cardDto = new CardDto();
+        CardDto cardDto = CardDto.builder().build();
 
         cardDto.setId(user.getId());
         cardDto.setUsername(user.getUsername());
