@@ -53,6 +53,7 @@ footer {
     position: absolute;
     width: 100%;
     margin-top: 50px;
+    /*bottom: 0; !* Might overkill*!*/
 }
 
 .btn-itd {
@@ -101,4 +102,7 @@ footer .row{
 
 .custom_text {
     line-height: 23px;
+}
+footer {
+    bottom: 0;
 }

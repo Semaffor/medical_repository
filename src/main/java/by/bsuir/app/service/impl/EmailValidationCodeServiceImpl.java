@@ -28,4 +28,9 @@ public class EmailValidationCodeServiceImpl implements EmailValidationCodeServic
     public void delete(EmailValidationCode emailValidationCode) {
         emailValidationCodeDao.delete(emailValidationCode);
     }
+
+    @Override
+    public Long save(EmailValidationCode validationCode) {
+        return emailValidationCodeDao.save(validationCode);
+    }
 }

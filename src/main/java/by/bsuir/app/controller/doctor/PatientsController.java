@@ -61,7 +61,7 @@ public class PatientsController {
     public ResponseEntity<?> addBioBloodTestResult(@PathVariable("id") Long bloodTestId,
                                                    @RequestBody Map<String, String> params) {
         biochemicalBloodTestService.addRecommendation(
-                Long.parseLong(params.get("userId")),
+                params.get("username").replace("\"", ""),
                 bloodTestId,
                 params.get("recom").replace("\"", ""));
         return new ResponseEntity<>(HttpStatus.OK);

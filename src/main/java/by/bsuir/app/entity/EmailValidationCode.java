@@ -1,9 +1,6 @@
 package by.bsuir.app.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -13,6 +10,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString(exclude = {"user"})
 public class EmailValidationCode extends BaseEntity {
 
     @NonNull

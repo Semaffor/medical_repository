@@ -6,6 +6,7 @@
     <th:block th:include="/common/fragments-util :: head"/>
     <th:block th:include="/common/fragments-util :: jQuery-lib"/>
     <th:block th:include="/common/fragments-util :: datatables-css"/>
+    <link th:href="@{/static/css/footer-bottom.css}" rel="stylesheet"/>
     <link th:href="@{/static/css/home.css}" rel="stylesheet"/>
     <link th:href="@{/static/css/patient-analizes.css}" rel="stylesheet"/>
     <title th:text="#{navbar.brand}"></title>
@@ -13,7 +14,7 @@
 <body>
 <div th:replace="/common/fragments-page :: header"/>
 
-<input id="userId" type="hidden" th:value="${#authentication.getPrincipal().getUsername()}">
+<input id="username" type="hidden" th:value="${#authentication.getPrincipal().getUsername()}">
 <div class="main head-block">
     <div class="container ">
         <div class="container ">
@@ -52,7 +53,7 @@
 <!--        <div class="container ">-->
 <!--            <div class="row">-->
 <!--                <div class="col-xl-4 col-12"></div>-->
-<!--                <div class="col-xl-4 col-12"><h2 th:text="#{analyzes.blood.general.title}"></h2></div>-->
+<!--                <div class="col-xl-4 col-12"><h2 th:text="#{analyzesEnum.blood.general.title}"></h2></div>-->
 <!--                <div class="col-xl-4 col-12"></div>-->
 <!--            </div>-->
 <!--        </div>-->

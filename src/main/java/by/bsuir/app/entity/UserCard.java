@@ -15,6 +15,7 @@ import java.util.Date;
 @EqualsAndHashCode(exclude = {"user"}, callSuper = true)
 @Entity
 @JsonIgnoreProperties(value = {"user"})
+@ToString(exclude = {})
 public class UserCard extends BaseEntity {
 
    private static final long serialVersionUID = 1L;

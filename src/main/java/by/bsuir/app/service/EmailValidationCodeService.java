@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface EmailValidationCodeService {
     Optional<EmailValidationCode> findByUniqueCode(String replace);
     void delete(EmailValidationCode emailValidationCode);
+    Long save(EmailValidationCode validationCode);
 }

@@ -65,14 +65,14 @@ public class RegistrationController {
 
     @ResponseBody
     @PostMapping("/reset/password")
-    private ResponseEntity<?> passwordRecoverySendMail(@RequestBody String email) {
+    public ResponseEntity<?> passwordRecoverySendMail(@RequestBody String email) {
         userService.sendRecoveryLink(email.replace("\"", "")); //TODO "" around
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @GetMapping("/reset/password/{code}")
-    private String showPasswordRecoveryPage(@PathVariable String code, Model model) {
+    public String showPasswordRecoveryPage(@PathVariable String code, Model model) {
         try {
             Optional<EmailValidationCode> codeOptional = emailValidationCodeService.findByUniqueCode(code.replace("\"", ""));
             if (codeOptional.isPresent()) {
@@ -90,7 +90,7 @@ public class RegistrationController {
 
     @ResponseBody
     @PutMapping("/reset/password")
-    private ResponseEntity<?> changePassword(@RequestBody PasswordDto passwordDto) {
+    public ResponseEntity<?> changePassword(@RequestBody PasswordDto passwordDto) {
         userService.changePassword(passwordDto.getId(), passwordDto.getPassword(), passwordEncoder);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -102,7 +102,7 @@ public class RegistrationController {
         if (isUserActivated) {
             model.addAttribute("activated", getInternationalizationMessage("user.activation.success"));
         } else {
-            model.addAttribute("failCode", getInternationalizationMessage("user.activation.fail"));
+            model.addAttribute("recovery", getInternationalizationMessage("user.activation.fail"));
         }
 
         return "login";

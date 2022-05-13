@@ -16,26 +16,28 @@ $(document).ready(function () {
             hideLabel('#captcha', "normal");
             hideLabel('#reg_button', 'normal');
             $('#sending').show('slow');
+
             let formData = getDataFromFormById('form');
-            let csrfToken = getCsrfTokenFromCookie();
             fetch('/auth/registration', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json','X-XSRF-TOKEN': csrfToken},
+                headers: {'Content-Type': 'application/json', 'X-XSRF-TOKEN': getCsrfTokenFromCookie()},
                 body: JSON.stringify(formData),
             })
                 .then(response => {
                     if (response.status === 200) {
-                        hideLabel('#captcha', "normal");
-                        hideLabel('#reg_button', 'normal');
                         $('#sending').hide('slow');
                         $('#successRegistrationLabel').show('slow');
+                    } else {
+                        grecaptcha.reset();
+                        $("#captcha").show("slow");
+                        $("#reg_button").show("slow");
+                        $('#sending').hide('slow');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data)
                     Object.keys(data).forEach((key) => {
-                        textAlert("#" + key + "_error_text", data[key], 2000);
+                        textAlert("#" + key + "_error_text", data[key], 5000);
                     })
                 });
         }
@@ -43,8 +45,7 @@ $(document).ready(function () {
 
     function checkPasswords() {
         if (getHtmlValByName("matchingPassword") !== getHtmlValByName("password")) {
-            console.log("here");
-            textAlert('#repeat_pass_error_text', "Passwords are not similar", 3000);
+            showAndHideAfterTime("#repeat_pass_error_text", 4000);
             return false;
         }
         return true;

@@ -34,9 +34,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     private String serverUrl;
     private final MailSender mailSender;
 
-    public UserServiceImpl(Dao<User> dao, UserDao userDao, EmailValidationCodeDao emailValidationCodeDao,
+    public UserServiceImpl(UserDao userDao, EmailValidationCodeDao emailValidationCodeDao,
                            MailSender mailSender) {
-        super(dao);
+        super(userDao);
         this.userDao = userDao;
         this.emailValidationCodeDao = emailValidationCodeDao;
         this.mailSender = mailSender;
@@ -210,7 +210,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             Optional<User> userOptional = userDao.findByUsername(username);
             if (userOptional.isPresent()) {
                 RoleHandler roleHandler = new RoleHandler();
-                System.out.println(roleString);
                 Role role = roleHandler.getRoleFromLocalizedValue(roleString);
 
                 User user = userOptional.get();

@@ -12,6 +12,15 @@ public class DateConverter {
 
     public String convertToNewDateFormatString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat(BY_DATE_FORMAT);
-       return dateFormat.format(date);
+        AnalyzesFactory analyzesFactory = AnalyzesFactory.getInstance();
+        analyzesFactory.getAnalyze(AnalyzesEnum.GENERAL);
+        return dateFormat.format(date);
+    }
+
+    public String convertToNewDateFormatString(String date) {
+        DateFormat dateFormat = new SimpleDateFormat(BY_DATE_FORMAT);
+        AnalyzesFactory analyzesFactory = AnalyzesFactory.getInstance();
+        analyzesFactory.getAnalyze(AnalyzesEnum.GENERAL);
+        return dateFormat.format(date);
     }
 }

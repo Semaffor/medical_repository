@@ -75,14 +75,14 @@ public class BiochemicalBloodTestServiceImplTest {
         Mockito.when(userDao.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(user));
         Mockito.doNothing().when(bioBloodTestDao).update(test);
 
-        boolean isRecommendationAdded = bioBloodTestService.addRecommendation(2L, 2L, "");
+        boolean isRecommendationAdded = bioBloodTestService.addRecommendation("", 2L, "");
         Assert.assertTrue(isRecommendationAdded);
     }
 
     @Test
     public void testAddRecommendationShouldNotWhenTestNotExists() throws DaoException {
         Mockito.when(bioBloodTestDao.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        boolean isRecommendationAdded = bioBloodTestService.addRecommendation(2L, 2L, "");
+        boolean isRecommendationAdded = bioBloodTestService.addRecommendation("", 2L, "");
         Assert.assertFalse(isRecommendationAdded);
     }
 }
