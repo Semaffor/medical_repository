@@ -1,8 +1,10 @@
 package by.bsuir.app.without;
 
+import by.bsuir.app.dto.UserRegistrationDto;
 import by.bsuir.app.entity.EmailValidationCode;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.exception.EmailNotFoundException;
+import by.bsuir.app.exception.UserAlreadyExistsException;
 import by.bsuir.app.service.EmailValidationCodeService;
 import by.bsuir.app.service.UserService;
 import org.junit.Assert;
@@ -113,5 +115,34 @@ public class UserServiceImplTest {
     public void testChangePasswordWhenUserNotExists() {
         boolean isChanged = service.changePassword(0L, "newPass", new BCryptPasswordEncoder());
         assertThat(isChanged).isFalse();
+    }
+
+    @Test(expected = UserAlreadyExistsException.class)
+    public void testRegisterNewUserWhenUsernameAlreadyExists() {
+        UserRegistrationDto user = new UserRegistrationDto();
+        user.setUsername("doc");
+        user.setPassword("1234");
+        user.setEmail("dd@list.ru");
+        service.registerNewUserAccount(user, new BCryptPasswordEncoder());
+    }
+
+    @Test(expected = UserAlreadyExistsException.class)
+    public void testRegisterNewUserWhenEmailAlreadyExists() {
+        UserRegistrationDto user = new UserRegistrationDto();
+        user.setUsername("newUser");
+        user.setPassword("1234");
+        user.setEmail("nec@hotmail.org");
+        service.registerNewUserAccount(user, new BCryptPasswordEncoder());
+    }
+
+    @Test
+    @Rollback
+    public void testRegisterNewUserWhenUserNotExists() {
+        UserRegistrationDto user = new UserRegistrationDto();
+        user.setUsername("newUser");
+        user.setPassword("1234");
+        user.setEmail("newEmail@hotmail.org");
+        User registredUser = service.registerNewUserAccount(user, new BCryptPasswordEncoder());
+        assertThat(registredUser.getId()).isNotNull();
     }
 }
