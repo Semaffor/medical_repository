@@ -1,4 +1,4 @@
-package by.bsuir.app.controller;
+package by.bsuir.app.without;
 
 import by.bsuir.app.config.HibernateConfig;
 import by.bsuir.app.config.MailConfig;
@@ -25,9 +25,6 @@ import static org.hamcrest.Matchers.equalTo;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RegistrationControllerTest {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     @Test
     public void passwordRecoverySendMail() throws IOException {
 
@@ -41,6 +38,19 @@ public class RegistrationControllerTest {
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/json");
+
+        CloseableHttpResponse response = client.execute(httpPost);
+        assertThat(response.getStatusLine().getStatusCode(), equalTo(200));
+        client.close();
+    }
+
+    @Test
+    public void changeBlockStatus() throws IOException {
+
+        String username = "doc";
+
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost("http://localhost:8080/auth/block/" + username);
 
         CloseableHttpResponse response = client.execute(httpPost);
         assertThat(response.getStatusLine().getStatusCode(), equalTo(200));
