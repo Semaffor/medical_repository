@@ -24,13 +24,12 @@
         <hibernate.validator.version>6.2.3.Final</hibernate.validator.version>
         <hikaricp.version>5.0.1</hikaricp.version>
         <javax.servlet>4.0.1</javax.servlet>
-        <loggger.version>2.17.1</loggger.version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <mysql.connector.version>8.0.29</mysql.connector.version>
+        <logback.version>1.2.11</logback.version>
         <spring.version>5.3.19</spring.version>
         <springsecurity.version>5.6.1</springsecurity.version>
-        <log4j.version>2.17.1</log4j.version>
         <validation.version>2.0.1.Final</validation.version>
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <thymeleaf.security.version>3.1.0.M1</thymeleaf.security.version>
@@ -150,23 +149,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- SLF4J + Log4j   -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+        <!-- SLF4J + logback   -->
 
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <!-- Hibernate -->
