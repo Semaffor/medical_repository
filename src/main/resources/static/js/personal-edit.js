@@ -1,4 +1,36 @@
 $(document).ready(() => {
+
+    $("#userPhoto").click((e) => {
+        $("#edit_photo")[0].disabled = false;
+    })
+
+    $("#edit_photo").click((e) => {
+        let photo = document.getElementById('userPhoto').files[0];
+        const username = $('#username').val();
+        let formData = new FormData();
+        formData.append("photo", photo);
+
+        fetch(`/user/personal/edit/photo/${username}`, {
+            method: "POST",
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'X-XSRF-TOKEN': getCsrfTokenFromCookie()
+            },
+            body: formData
+        }).then((response) => {
+            if (response.status !== 200) {
+                showAndHideAfterTime("#photo_fail", 2000)
+            } else {
+                showAndHideAfterTime("#photo_success", 2000)
+                return response.text();
+            }
+        }).then(pathPhoto => {
+            if (pathPhoto != null) {
+                $("#avatar_id")[0].src = `/img/${pathPhoto}`;
+            }
+        });
+    })
+
     $("#submit_edit").click((e) => {
         e.preventDefault();
         $(".error").hide('slow')
@@ -23,7 +55,7 @@ $(document).ready(() => {
         if (old !== newRole) {
             fetch(serverURL + "user/personal/edit/" + username + "/role", {
                 method: "PUT",
-                headers: {'Content-Type': 'application/json','X-XSRF-TOKEN': getCsrfTokenFromCookie()},
+                headers: {'Content-Type': 'application/json', 'X-XSRF-TOKEN': getCsrfTokenFromCookie()},
                 body: JSON.stringify(newRole),
             }).then(response => {
                 console.log(response.status)
@@ -36,3 +68,6 @@ $(document).ready(() => {
         }
     })
 })
+
+function changePhotoElement(photoName) {
+}

@@ -36,4 +36,5 @@ public interface UserService extends Service<User> {
 
     boolean changeRole(String username, String role);
 
+    boolean uploadAvatar(String username, String photoName);
 }

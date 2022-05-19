@@ -32,6 +32,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Value("${server.url}")
     private String serverUrl;
+
+    @Value("${default.photo.name}")
+    private String defaultPhotoName;
+
     private final MailSender mailSender;
 
     public UserServiceImpl(UserDao userDao, EmailValidationCodeDao emailValidationCodeDao,
@@ -134,6 +138,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         user.setEmail(userRegistrationDto.getEmail());
         user.setRoles(Set.of(Role.USER));
 
+        UserCard userCard = new UserCard();
+        userCard.setPhotoName(defaultPhotoName);
+
+        user.setCard(userCard);
         String uuidCode = UUID.randomUUID().toString();
         EmailValidationCode code = new EmailValidationCode(uuidCode);
         user.setActivationCode(code);
@@ -216,6 +224,23 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
                 user.setRoles(Set.of(role));
                 userDao.update(user);
 
+                return true;
+            }
+            return false;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean uploadAvatar(String username, String photoName) {
+        try {
+            Optional<User> userOptional = userDao.findByUsername(username);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                user.getCard().setPhotoName(photoName);
+                userDao.update(user);
                 return true;
             }
             return false;

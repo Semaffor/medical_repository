@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .and().formLogin()
                     .loginPage("/auth/logIn").permitAll()
                     .loginProcessingUrl("/auth/authentication")
-                    .defaultSuccessUrl(HOME_PAGE_URL, true)
+                    .defaultSuccessUrl(HOME_PAGE_URL, false)
                 .and().logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
                     .invalidateHttpSession(true)

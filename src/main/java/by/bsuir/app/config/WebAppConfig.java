@@ -1,6 +1,7 @@
 package by.bsuir.app.config;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +39,9 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     private final static String PREFIX = "classpath:/templates/view/";
     private final static String SUFFIX = ".html";
     private final static String CHARACTER_ENCODING = "UTF-8";
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public WebAppConfig(Environment environment, ApplicationContext applicationContext) {
         this.env = environment;
@@ -130,6 +134,8 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").
                 addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("file:/" + uploadPath + "/");
 
     }
 

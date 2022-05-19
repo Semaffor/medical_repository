@@ -45,6 +45,7 @@ public class PersonalController {
                 model.addAttribute("username", user.getUsername());
                 model.addAttribute("genders", Gender.values());
                 model.addAttribute("roles", user.getRoles());
+                model.addAttribute("avatarFileName", user.getCard().getPhotoName());
             }
         } catch (ServiceException e) {
             model.addAttribute("loadingFail", "true");
@@ -70,6 +71,7 @@ public class PersonalController {
                 model.addAttribute("cardDto", userDto);
                 model.addAttribute("genders", Gender.values());
                 model.addAttribute("roles", localizedRoleNamesWithoutUserRole);
+                model.addAttribute("avatarFileName", user.getCard().getPhotoName());
             } else {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                         String.format("Entity with username: %s not " + "found", username));

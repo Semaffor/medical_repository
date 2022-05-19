@@ -64,3 +64,30 @@ body{
     display: flex;
     align-items: center;
 }
+
+#userPhoto {
+    width: 200px;
+    height: 20px;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#photo_form label {
+  color: #0d6efd;
+}
+
+#photo_form label:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+#photo_form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hided {
+    display: none;
+}

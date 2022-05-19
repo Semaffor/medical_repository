@@ -4,8 +4,10 @@ import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCard;
 import by.bsuir.app.entity.enums.Gender;
 import by.bsuir.app.entity.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
@@ -16,7 +18,8 @@ import java.util.Set;
 
 @Data
 @Builder
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class CardDto {
 
     private final static int MIN_STRING_LENGTH = 3;
@@ -58,6 +61,8 @@ public class CardDto {
 
     private String role;
 
+    private String avatarFileName;
+
     public static CardDto fromUser(User user, String lang) {
         CardDto cardDto = CardDto.builder().build();
 
@@ -78,6 +83,7 @@ public class CardDto {
             } else {
                 cardDto.setRole(firstRole.getRu());
             }
+            cardDto.setAvatarFileName(user.getCard().getPhotoName());
         }
        return cardDto;
     }

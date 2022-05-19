@@ -131,7 +131,6 @@ public class RegistrationController {
         return new ResponseEntity<>(map, HttpStatus.CONFLICT);
     }
 
-    //TODO
     private String getInternationalizationMessage(String key) {
         return messageSource.getMessage(key, new Object[0], LocaleContextHolder.getLocale());
     }

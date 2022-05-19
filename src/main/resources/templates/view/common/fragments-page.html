@@ -21,9 +21,9 @@
                 <li class="nav-item-itd btn-login">
                     <a class="btn-itd" th:href="@{/admin/reports}" th:text="#{navbar.admin.reports}"/>
                 </li>
-<!--                <li class="nav-item-itd btn-login">-->
-<!--                    <a class="btn-itd" th:href="@{/admin/messages}" th:text="#{navbar.admin.messages}"/>-->
-<!--                </li>-->
+                <!--                <li class="nav-item-itd btn-login">-->
+                <!--                    <a class="btn-itd" th:href="@{/admin/messages}" th:text="#{navbar.admin.messages}"/>-->
+                <!--                </li>-->
             </div>
             <div sec:authorize="hasAuthority('USER')" th:remove="tag">
                 <li class="nav-item-itd btn-login">
@@ -33,19 +33,20 @@
                     <a class="btn-itd" th:href="@{/user/analyzes}" th:text="#{navbar.user.analyzesEnum}">Анализы</a>
                 </li>
                 <li class="nav-item-itd btn-login">
-                    <a class="btn-itd" th:href="@{/user/conclusions}" th:text="#{navbar.user.conclusions}">Заключения</a>
+                    <a class="btn-itd" th:href="@{/user/conclusions}"
+                       th:text="#{navbar.user.conclusions}">Заключения</a>
                 </li>
-<!--                <li class="nav-item-itd btn-login">-->
-<!--                    <a class="btn-itd" th:href="@{/user/statistics}" th:text="#{navbar.user.statistics}">Статистика</a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item-itd btn-login">-->
+                <!--                    <a class="btn-itd" th:href="@{/user/statistics}" th:text="#{navbar.user.statistics}">Статистика</a>-->
+                <!--                </li>-->
             </div>
             <div sec:authorize="hasAuthority('DOCTOR')" th:remove="tag">
                 <li class="nav-item-itd btn-login">
                     <a class="btn-itd" th:href="@{/doctor/patients}" th:text="#{navbar.doctor.patients}">Пациенты</a>
                 </li>
-<!--                <li class="nav-item-itd btn-login">-->
-<!--                    <a class="btn-itd" th:href="@{/doctor/analytics}" th:text="#{navbar.doctor.analytics}">Аналитика</a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item-itd btn-login">-->
+                <!--                    <a class="btn-itd" th:href="@{/doctor/analytics}" th:text="#{navbar.doctor.analytics}">Аналитика</a>-->
+                <!--                </li>-->
             </div>
             <div sec:authorize="isAuthenticated()">
                 <li class="nav-item-itd btn-login">
@@ -60,36 +61,36 @@
 </header>
 
 <footer id="footer" th:fragment="footer">
-<!--    <div class="row justify-content-center mb-0 pt-5 pb-0 row-2 ">-->
-<!--        <div class="col-12">-->
-<!--            <div class="row row-2">-->
-<!--                <div class="col-sm-3 text-md-center">-->
-<!--                    <h5><span> <i class="fa fa-firefox text-light" aria-hidden="true"></i></span><b> Stride</b></h5>-->
-<!--                </div>-->
-<!--                <div class="col-sm-3 my-sm-0 mt-5">-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li class="mt-0">Platform</li>-->
-<!--                        <li>Help Center</li>-->
-<!--                        <li>Security</li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--                <div class="col-sm-3 my-sm-0 mt-5">-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li class="mt-0">Customers</li>-->
-<!--                        <li>Use Cases</li>-->
-<!--                        <li>Customers Services</li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--                <div class="col-sm-3 my-sm-0 mt-5">-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li class="mt-0">Company</li>-->
-<!--                        <li>About</li>-->
-<!--                        <li>Careers- <span class="Careers">We're-hiring</span></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="row justify-content-center mb-0 pt-5 pb-0 row-2 ">-->
+    <!--        <div class="col-12">-->
+    <!--            <div class="row row-2">-->
+    <!--                <div class="col-sm-3 text-md-center">-->
+    <!--                    <h5><span> <i class="fa fa-firefox text-light" aria-hidden="true"></i></span><b> Stride</b></h5>-->
+    <!--                </div>-->
+    <!--                <div class="col-sm-3 my-sm-0 mt-5">-->
+    <!--                    <ul class="list-unstyled">-->
+    <!--                        <li class="mt-0">Platform</li>-->
+    <!--                        <li>Help Center</li>-->
+    <!--                        <li>Security</li>-->
+    <!--                    </ul>-->
+    <!--                </div>-->
+    <!--                <div class="col-sm-3 my-sm-0 mt-5">-->
+    <!--                    <ul class="list-unstyled">-->
+    <!--                        <li class="mt-0">Customers</li>-->
+    <!--                        <li>Use Cases</li>-->
+    <!--                        <li>Customers Services</li>-->
+    <!--                    </ul>-->
+    <!--                </div>-->
+    <!--                <div class="col-sm-3 my-sm-0 mt-5">-->
+    <!--                    <ul class="list-unstyled">-->
+    <!--                        <li class="mt-0">Company</li>-->
+    <!--                        <li>About</li>-->
+    <!--                        <li>Careers- <span class="Careers">We're-hiring</span></li>-->
+    <!--                    </ul>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
     <div class="row justify-content-center mt-0 pt-0 row-1 mb-0 px-sm-3 px-2">
         <div class="col-12">
             <div class="row my-4 row-1 no-gutters">
@@ -107,7 +108,7 @@
 
 <th:block th:fragment="lang-dropdown">
     <div class="header_right me-5 ms-2 align-items-center languages_dropdown">
-        <ul >
+        <ul>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="">
                     <img th:src="@{/static/images/lang.png}" alt="lang"/>
@@ -126,14 +127,27 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                         class="rounded-circle" width="150">
+                    <!--                    src="https://bootdey.com/img/Content/avatar/avatar7.png"-->
+                    <img id="avatar_id" th:if="${avatarFileName}" th:src="@{${ '/img/' + avatarFileName}}"
+                         alt="user_photo" class="rounded-circle" width="150" height="150">
+                    <div id="photo_form" class="mt-3">
+                        <label for="userPhoto" th:text="#{file.avatar.change}"></label>
+                        <input class="form-control form-control-sm" id="userPhoto" name="photo" type="file">
+                        <button id="edit_photo" class="btn btn-primary mt-1" disabled><span th:text="#{label.changes.edit}"/></button>
+                    </div>
                     <div class="mt-3">
-                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'USER'}" th:text="#{profile.role.user}"></p>
-                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'ADMIN'}" th:text="#{profile.role.admin}"></p>
-                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'DOCTOR'}"  th:text="#{profile.role.doctor}"></p>
+                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'USER'}"
+                           th:text="#{profile.role.user}"></p>
+                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'ADMIN'}"
+                           th:text="#{profile.role.admin}"></p>
+                        <p class="text-secondary mb-1" th:if="${roles[0].toString() eq 'DOCTOR'}"
+                           th:text="#{profile.role.doctor}"></p>
                         <h4 th:text="${username}">John Doe</h4>
                     </div>
+                    <div id="photo_success" class="hided alert alert-primary text-center"
+                         th:text="#{file.avatar.success}"></div>
+                    <div id="photo_fail" class="hided alert alert-warning text-center"
+                         th:text="#{file.avatar.fail}"></div>
                 </div>
             </div>
         </div>

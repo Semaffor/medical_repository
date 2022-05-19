@@ -28,6 +28,8 @@ public class UserCard extends BaseEntity {
    private Date birthday;
    private String mobile;
 
+   private String photoName;
+
    @Enumerated(EnumType.ORDINAL)
    private Gender gender;
 
