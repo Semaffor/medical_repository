@@ -29,7 +29,7 @@ public class UploadFileController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/personal/edit/photo/{username}")
+    @PatchMapping("/user/personal/edit/photo/{username}")
     public ResponseEntity<?> uploadAvatar(@PathVariable("username") String username,
                                           @RequestParam("photo") MultipartFile file) {
         if (file != null) {

@@ -11,7 +11,7 @@ $(document).ready(() => {
         formData.append("photo", photo);
 
         fetch(`/user/personal/edit/photo/${username}`, {
-            method: "POST",
+            method: "PATCH",
             headers: {
                 // 'Content-Type': 'multipart/form-data',
                 'X-XSRF-TOKEN': getCsrfTokenFromCookie()
@@ -34,6 +34,10 @@ $(document).ready(() => {
     $("#submit_edit").click((e) => {
         e.preventDefault();
         $(".error").hide('slow')
+
+        if (!isDataValid()) {
+            return false;
+        }
 
         const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
         const cardDto = Object.fromEntries(new FormData(document.forms['userPersonalForm']).entries());
@@ -68,6 +72,35 @@ $(document).ready(() => {
         }
     })
 })
-
-function changePhotoElement(photoName) {
+function isDataValid() {
+    let nameVal = $("#name").val();
+    if (nameVal.length < 3 ||nameVal.length > 28) {
+        showAndHideAfterTime(".name_error");
+        return false;
+    }
+    let surnameVal = $("#surname").val();
+    if (surnameVal.length < 3 ||surnameVal.length > 28) {
+        showAndHideAfterTime(".surname_error");
+        return false;
+    }
+    let thirdNameVal = $("#thirdName").val();
+    if (thirdNameVal.length < 3 ||thirdNameVal.length > 28) {
+        showAndHideAfterTime(".thirdName_error");
+        return false;
+    }
+    let emailVal = $("#email").val();
+    let emailPattern = /^(.+)@(.+)$/;
+    if (!emailPattern.test(emailVal)) {
+        console.log(emailPattern.test(emailVal));
+        showAndHideAfterTime(".email_error");
+        return false;
+    }
+    let mobileVal = $("#mobile").val();
+    let mobilePattern = /^(\d{2})-(\d{7})/
+    if (!mobilePattern.test(mobileVal)) {
+        console.log(mobilePattern.test(mobileVal))
+        showAndHideAfterTime(".mobile_error");
+        return false;
+    }
+    return true;
 }

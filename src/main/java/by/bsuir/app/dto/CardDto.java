@@ -27,31 +27,31 @@ public class CardDto {
 
     private Long id;
 
-    @NotBlank(message = "{dto.empty}")
+    @NotBlank(message = "{dto.field.empty}")
     @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String username;
 
-    @NotBlank(message = "{dto.empty}")
+    @NotBlank(message = "{dto.field.empty}")
     @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String name;
 
-    @NotBlank(message = "{dto.empty}")
+    @NotBlank(message = "{dto.field.empty}")
     @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String surname;
 
-    @NotBlank(message = "{dto.empty}")
+    @NotBlank(message = "{dto.field.empty}")
     @Size(min = MIN_STRING_LENGTH, max = MAX_STRING_LENGTH, message = "{dto.card.length}")
     private String thirdName;
 
-    @NotBlank(message = "{dto.empty}")
+    @NotBlank(message = "{dto.field.empty}")
     @Email(regexp = "[\\S._%+-]+@[\\S.-]+\\.[\\S]{2,}", message = "{dto.card.email.pattern}")
     private String email;
 
-    @NotNull(message = "{dto.empty}")
+    @NotNull(message = "{dto.field.empty}")
     @Pattern(regexp = "^(\\d{2})-(\\d{7})", message = "+375 - XX-XXXXXXX")
     private String mobile;
 
-    @NotNull(message = "{dto.empty}")
+    @NotNull(message = "{dto.field.empty}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "{dto.card.date.past}")
     private Date birthday;

@@ -31,7 +31,7 @@
                                            th:value="*{name}" min="3" max="28">
                                     <!--                                    <p class="text_error_underline" th:each="error: ${#fields.errors('name')}"-->
                                     <!--                                       th:text="${error}"></p>-->
-                                    <p class="text_error_underline name_error error" th:text="#{reg.error}"></p>
+                                    <p class="text_error_underline name_error error" th:text="#{dto.card.length}"></p>
 
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                     <input type="text" class="form-control" th:field="*{surname}"
                                            th:value="*{surname}" min="3" max="28">
                                     <!--                                    <p class="text_error_underline" th:if="${#fields.errors('surname')}"-->
-                                    <p class="text_error_underline surname_error error" th:text="#{reg.error}"></p>
+                                    <p class="text_error_underline surname_error error" th:text="#{dto.card.length}"></p>
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
@@ -51,17 +51,16 @@
                                     <input type="text" class="form-control" th:field="*{thirdName}"
                                            th:value="*{thirdName}" min="3" max="28">
                                     <!--                                    <p class="text_error_underline" th:if="${#fields.errors('thirdName')}"-->
-                                    <p class="text_error_underline thirdName_error error" th:text="#{reg.error}"></p>
+                                    <p class="text_error_underline thirdName_error error" th:text="#{dto.card.length}"></p>
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
                                 <div class="col-sm-3"><h6 class="mb-0" th:text="#{reg.email}">Email</h6></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="email" class="form-control" th:field="*{email}"
-                                           th:value="*{email}">
+                                    <input type="email" class="form-control" th:field="*{email}" th:value="*{email}">
                                     <!--                                    <p id="email" class="text_error_underline" th:if="${#fields.errors('email')}"-->
                                     <!--                                       th:errors="*{email}"></p>-->
-                                    <p class="text_error_underline email_error error" th:text="#{reg.error}"></p>
+                                    <p class="text_error_underline email_error error" th:text="#{dto.card.email.pattern}"></p>
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
@@ -70,11 +69,11 @@
                                     <div class="mobile_block">
                                         <h6 class="mb-0 me-2">+375</h6>
                                         <input type="text" class="form-control" th:field="*{mobile}"
-                                               th:value="*{mobile}" >
+                                               th:value="*{mobile}" placeholder="XX-XXXXXXX">
                                     </div>
                                     <!--                                    <p class="text_error_underline" th:if="${#fields.errors('mobile')}"-->
                                     <!--                                       th:errors="*{mobile}"></p>-->
-                                    <p class="text_error_underline mobile_error error" th:text="#{reg.error}"></p>
+                                    <p class="text_error_underline mobile_error error" th:text="#{dto.card.phone.pattern}"></p>
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
@@ -125,7 +124,7 @@
                                  th:text="#{label.changes.submitted.fail}"></div>
                             <div class="success alert alert-primary text-center"
                                  th:text="#{label.changes.success}"></div>
-                            <div class="fail alert alert-warning text-center" th:text="#{label.changes.fail}"></div>
+<!--                            <div class="fail alert alert-warning text-center" th:text="#{label.changes.fail}"></div>-->
                             <div class="row">
                                 <div class="col-sm-12 text-secondary text-center">
                                     <button id="submit_edit" class="btn btn-primary px-4"

@@ -1,4 +1,4 @@
-function    generalFormAjax(method, url, csrfToken, data) {
+function generalFormAjax(method, url, csrfToken, data) {
     $.ajax({
         type: method,
         url: url,
@@ -17,8 +17,8 @@ function    generalFormAjax(method, url, csrfToken, data) {
             let errorMap = errors['responseJSON'];
             Object.keys(errorMap).forEach(
                 error => {
-                    console.log(error)
                     const generatedElementClassName = "." + error + "_error";
+                    console.log(generatedElementClassName);
                     $(generatedElementClassName).html(errorMap[error]).show('slow')
                     hideElementAfterTime(generatedElementClassName, 3000, 'slow');
                 }
