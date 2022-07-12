@@ -139,7 +139,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testRegisterNewUserAccountReturnRegisteredUserWhenUsernameAndEmailFree() throws DaoException {
-        Mockito.when(userDao.findByUsername("Dima")).thenReturn(Optional.empty());
+//        Mockito.when(userDao.findByUsername("Dima")).thenReturn(Optional.empty());
 
         UserRegistrationDto dto = new UserRegistrationDto();
         dto.setUsername("Dimonch");
@@ -147,8 +147,8 @@ public class UserServiceImplTest {
         dto.setEmail("dbu@gmail.com");
         BCryptPasswordEncoder mockPE = Mockito.mock(BCryptPasswordEncoder.class);
 
-        Mockito.when(userDao.findByEmail("some@some.by")).thenReturn(Optional.of(user));
-        Mockito.when(emailValidationCodeDao.save(new EmailValidationCode(""))).thenReturn(2L);
+//        Mockito.when(userDao.findByEmail("some@some.by")).thenReturn(Optional.of(user));
+//        Mockito.when(emailValidationCodeDao.save(new EmailValidationCode(""))).thenReturn(2L);
         Mockito.when(mockPE.encode(anyString())).thenReturn("12345");
         Mockito.doNothing().when(mailSender).send(anyString(), anyString(), anyString());
         userService.registerNewUserAccount(dto, mockPE);
@@ -175,8 +175,8 @@ public class UserServiceImplTest {
     @Test
     public void textActivateUserShouldNotActivateWhenCodeNotExists() {
         Mockito.when(userDao.findByActivationCode("")).thenReturn(Optional.empty());
-        Mockito.doNothing().when(emailValidationCodeDao).update(new EmailValidationCode());
-        Mockito.doNothing().when(userDao).update(user);
+//        Mockito.doNothing().when(emailValidationCodeDao).update(new EmailValidationCode());
+//        Mockito.doNothing().when(userDao).update(user);
         boolean isActivated = userService.activateUser("");
         Mockito.verify(emailValidationCodeDao, Mockito.times(0)).update(any());
         Assert.assertFalse(isActivated);
@@ -198,8 +198,8 @@ public class UserServiceImplTest {
     @Test(expected = EmailNotFoundException.class)
     public void testSendRecoveryLinkShouldNotSendMessageWhenEmailNotExists() throws DaoException {
         Mockito.when(userService.findByEmail("")).thenReturn(Optional.empty());
-        Mockito.when(emailValidationCodeDao.save(any())).thenReturn(2L);
-        Mockito.doNothing().when(mailSender).send(anyString(), anyString(), anyString());
+//        Mockito.when(emailValidationCodeDao.save(any())).thenReturn(2L);
+//        Mockito.doNothing().when(mailSender).send(anyString(), anyString(), anyString());
 
         userService.sendRecoveryLink("");
 
@@ -249,7 +249,7 @@ public class UserServiceImplTest {
     @Test
     public void testChangeRoleReturnFalseWhenUserNotExists() throws DaoException {
         Mockito.when(userService.findByUsername("")).thenReturn(Optional.empty());
-        Mockito.doNothing().when(userDao).update(user);
+//        Mockito.doNothing().when(userDao).update(user);
 
         boolean result = userService.changeRole("", "USER");
 

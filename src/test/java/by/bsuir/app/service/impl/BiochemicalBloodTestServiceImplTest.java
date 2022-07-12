@@ -72,7 +72,6 @@ public class BiochemicalBloodTestServiceImplTest {
                 .cholesterol(20.0)
                 .build();
         Mockito.when(bioBloodTestDao.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(test));
-        Mockito.when(userDao.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(user));
         Mockito.doNothing().when(bioBloodTestDao).update(test);
 
         boolean isRecommendationAdded = bioBloodTestService.addRecommendation("", 2L, "");

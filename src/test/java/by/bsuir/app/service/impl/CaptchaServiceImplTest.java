@@ -36,8 +36,8 @@ public class CaptchaServiceImplTest {
         GoogleResponse response = Mockito.mock(GoogleResponse.class);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(new LinkedMultiValueMap<>(),
                 new HttpHeaders());
-        Mockito.when(restTemplate.postForObject("", request, GoogleResponse.class)).thenReturn(response);
-        Mockito.when(response.isSuccess()).thenReturn(false);
+//        Mockito.when(restTemplate.postForObject("", request, GoogleResponse.class)).thenReturn(response);
+//        Mockito.when(response.isSuccess()).thenReturn(false);
         captchaService.verifyCaptcha("1234");
 
         Mockito.verify(restTemplate, Mockito.times(1)).postForEntity("", request, GoogleResponse.class);

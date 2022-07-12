@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RoleHandlerTest {
 
@@ -23,7 +24,7 @@ public class RoleHandlerTest {
             }
         };
 
-        Assert.assertEquals(expected, result);
+        Assert.assertEquals(expected.stream().sorted().collect(Collectors.toList()), result);
     }
 
     @Test
@@ -31,7 +32,7 @@ public class RoleHandlerTest {
         ArrayList<String> result = roleHandler
                 .getLocalizedRoleNamesWithoutUserRole(Role.values(), "en", Set.of(Role.DOCTOR));
 
-        ArrayList<String> expected = new ArrayList<String>() {
+        ArrayList<String> expected = new ArrayList<>() {
             {
                 add("Доктор");
                 add("Администратор");
