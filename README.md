@@ -15,7 +15,7 @@ Technologies:
 Lombok, Jackson, Flyway, html/css/js.*
 
 ### *Database schema*
-![img.png](rdme/img.png)
+![img.png](rdme/img_db.png)
 ---
 
 ### *Use cases (Possibilities)*
