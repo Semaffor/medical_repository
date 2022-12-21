@@ -52,18 +52,16 @@ Lombok, Jackson, Flyway, html/css/js.*
 - monitoring of medical indicators
 
 ### *Some screenshots*
-<img alt="img.png" src="rdme/img_12.png" width="210" height="340"/>
-<img alt="img_3.png" src="rdme/img_3.png" width="200" height="340"/>
+<img alt="img.png" src="rdme/img_13.png" width="410"/>
 <img alt="img_4.png" src="rdme/img_4.png" width="410"/>
 <img alt="img_5.png" src="rdme/img_5.png" width="410"/>
-<img alt="img.png" src="rdme/img11.png" width="800"/>
-
-![img_6.png](rdme/img_6.png)
-![img_7.png](rdme/img_7.png)
-![img_8.png](rdme/img_8.png)
-![img_9.png](rdme/img_9.png)
-![img_10.png](rdme/img_10.png)
-![img_11.png](rdme/img_11.png)
+<img alt="img.png" src="rdme/img11.png" width="830"/>
+<img alt="img_6.png" src="rdme/img_6.png" width="830"/>
+<img alt="img_7.png" src="rdme/img_7.png" width="830"/>
+<img alt="img_8.png" src="rdme/img_8.png" width="830"/>
+<img alt="img_9.png" src="rdme/img_9.png" width="830"/>
+<img alt="img_10.png" src="rdme/img_10.png" width="830"/>
+<img alt="img_11.png" src="rdme/img_11.png" width="830"/>
 ---
 
 ### *Development log*
